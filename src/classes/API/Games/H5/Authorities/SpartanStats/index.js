@@ -34,7 +34,7 @@ export default class SpartanStats extends Request
      */
     getPlayerCommendations = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.SPARTAN_STATS.PLAYER_COMMENDATIONS'), {
+        this.getEndpointByKey('H5.SPARTAN_STATS.COMMENDATIONS'), {
             player, options
         }
     )
@@ -67,7 +67,7 @@ export default class SpartanStats extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getMatchById = (matchId, options = {}) => this.call(
+    getMatchData = (matchId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.SPARTAN_STATS.MATCH'), {
             matchId, options
@@ -81,7 +81,7 @@ export default class SpartanStats extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getMatchEventsById = (matchId, options = {}) => this.call(
+    getMatchEvents = (matchId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
             matchId, options
@@ -173,16 +173,16 @@ export default class SpartanStats extends Request
     )
 
     /**
-     * Post match result
-     * @param {Object} body
+     * Get players presence
+     * @param {Array} players
      * @param {Object=} options 
      * @throws HaloDotAPIError
      * @return Promise
      */
-    postMatchResult = (body, options = {}) => this.call(
-        HTTPMethods.POST,
-        this.getEndpointByKey('H5.SPARTAN_STATS.MATCHES'), {
-            body, options
+    getPlayersPresence = (players, options = {}) => this.call(
+        HTTPMethods.GET,
+        this.getEndpointByKey('H5.SPARTAN_STATS.PRESENCE'), {
+            players, options
         }
     )
 }

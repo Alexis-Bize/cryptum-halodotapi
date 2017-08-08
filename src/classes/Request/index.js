@@ -12,6 +12,7 @@ import platforms from '@modules/api/platforms'
 
 import HTTPStatus from '@modules/http/status'
 import HTTPMethods from '@modules/http/methods'
+import HTTPContentTypes from '@modules/http/content-types'
 
 export default class Request
 {
@@ -80,7 +81,13 @@ export default class Request
 
     }
 
-    formatEndpoint = (endpoint, parameters) => {
+    /**
+     * Format endpoint
+     * @param {string} endpoint
+     * @param {Object=} parameters
+     * @return {string}
+     */
+    formatEndpoint = (endpoint, parameters = {}) => {
 
         (endpoint.match(/{([a-zA-Z]*?)}/g) || []).forEach(match => {
             endpoint = endpoint.replace(
@@ -101,6 +108,29 @@ export default class Request
     }
 
     /**
+     * Format headers
+     * @param {Object} headers
+     * @return {string}
+     */
+    formatHeaders = headers => {
+
+        let output = {};
+
+        Object.keys(headers).forEach(header => {
+
+            const headerName = header.split('-').map(key => {
+                return key.charAt(0).toUpperCase() + key.slice(1);
+            }).join('-');
+
+            output[headerName] = headers[header];
+
+        });
+
+        return output;
+        
+    }
+
+    /**
      * Call the API with specified arguments
      * @param {string} method 
      * @param {string} endpoint
@@ -115,14 +145,14 @@ export default class Request
             if (false === this.isSpartanTokenValid()) {
                 return reject(
                     new HaloDotAPIError(
-                        getErrorByNamespaceKey('MALFORMATED_AUTHORIZATION')
+                        getErrorByNamespaceKey('MALFORMATED_SPARTAN_TOKEN')
                     )
                 );
             }
 
             parameters = this.formatParameters(parameters);
 
-            const { body, headers } = parameters;
+            const { body } = parameters;
             const { options } = parameters || {
                 options: {}
             };
@@ -130,9 +160,7 @@ export default class Request
             if (
                 endpoint.indexOf('svc.halowaypoint.com') !== -1 ||
                 endpoint.uri.indexOf('cloudapp.net') !== -1
-            ) options.query = Object.assign({}, options.query || {}, {
-                auth: 'st'
-            });
+            ) options.query = Object.assign({}, options.query || {}, { auth: 'st' });
 
             let requestOptions = {
                 method,
@@ -142,11 +170,13 @@ export default class Request
                 headers: Object.assign({}, {
                     'X-343-Authorization-Spartan': this.getSpartanToken(),
                     '343-Telemetry-Session-Id': this.getTelemetrySessionId(),
-                    'Accept': 'application/json',
+                    'Accept': HTTPContentTypes.JSON,
                     'Accept-Encoding': 'gzip',
                     'Accept-Language': 'en',
                     'User-Agent': 'cpprestsdk/2.4.0'
-                }, _.isObject(headers) ? headers : {})
+                }, _.isObject(options.headers) ? (
+                    this.formatHeaders(options.headers)
+                ) : {})
             };
 
             if (true === _.isObject(options.query)) {
@@ -156,7 +186,7 @@ export default class Request
                 ) : `${requestOptions.uri}&${query}`
             }
 
-            if (requestOptions.headers['Accept'] === 'application/json') {
+            if ('application/json' === requestOptions.headers['Accept']) {
                 requestOptions.json = true;
             }
 
@@ -165,11 +195,9 @@ export default class Request
                 HTTPMethods.POST,
                 HTTPMethods.PATCH
             ].indexOf(method) !== -1) {
-                requestOptions.json = body;
-                requestOptions.headers['Content-Type'] = 'application/json; charset=utf-8'
+                requestOptions.body = JSON.stringify(body);
+                requestOptions.headers['Content-Type'] = `${HTTPContentTypes.JSON}; charset=utf-8`
             }
-
-            console.log(requestOptions)
 
             request(requestOptions, (responseError, responseInfo, responseBody) => {
 
@@ -232,7 +260,8 @@ export default class Request
                     case HTTPStatus.BAD_REQUEST:
                         return reject(
                             new HaloDotAPIError(
-                                getErrorByNamespaceKey('BAD_REQUEST')
+                                getErrorByNamespaceKey('BAD_REQUEST'),
+                                { debug: responseInfo }
                             )
                         );
 

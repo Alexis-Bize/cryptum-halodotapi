@@ -17,7 +17,7 @@ const errorNamespaces = {
     BAD_REQUEST:                [7, HTTPStatus.BAD_REQUEST, 'Bad request'],
     REQUEST_TIMEOUT:            [8, HTTPStatus.REQUEST_TIMEOUT, 'Request timeout'],
     UNKNOWN_GAME:               [30, HTTPStatus.BAD_REQUEST, 'Specified game does not exist: {0}'],
-    MALFORMATED_AUTHORIZATION:  [40, HTTPStatus.UNAUTHORIZED, 'Malformated authorization'],
+    MALFORMATED_SPARTAN_TOKEN:  [40, HTTPStatus.UNAUTHORIZED, 'Malformated SpartanToken'],
 }
 
 export const getErrorByNamespaceKey = (namespace, keys = []) => {
@@ -49,7 +49,7 @@ export default class HaloDotAPIError extends Error
 {
     constructor(error = [], additionalParameters = {}) {
 
-        const { headers } = additionalParameters;
+        const { headers, debug } = additionalParameters;
 
         error = extractErrorParameters(error);
         super(error.message);
@@ -62,7 +62,7 @@ export default class HaloDotAPIError extends Error
                 code: error.code,
                 status: error.status,
                 message: this.message,
-                headers
+                headers, debug
             }
         };
         
