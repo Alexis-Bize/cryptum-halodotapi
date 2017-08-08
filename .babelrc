@@ -1,0 +1,17 @@
+{
+    "presets": [
+        "es2015",
+        "stage-0"
+    ],
+    "plugins": [
+        [
+            "module-resolver", {
+                "root": ["./src"],
+                "alias": {
+                    "@classes": "./src/classes",
+                    "@modules": "./src/modules"
+                }
+            }
+        ]
+    ]
+}
