@@ -3,6 +3,10 @@ import path from 'path'
 import UGC from './Authorities/UGC'
 import HaloPlayer from './Authorities/HaloPlayer'
 import SpartanStats from './Authorities/SpartanStats'
+import Packs from './Authorities/Packs'
+import Search from './Authorities/Search'
+import Settings from './Authorities/Settings'
+import HACS from './Authorities/HACS'
 
 export default class Halo5
 {
@@ -14,6 +18,10 @@ export default class Halo5
         this.ugc = new UGC(spartanToken);
         this.haloPlayer = new HaloPlayer(spartanToken);
         this.spartanStats = new SpartanStats(spartanToken);
+        this.packs = new Packs(spartanToken);
+        this.search = new Search(spartanToken);
+        this.settings = new Settings(spartanToken);
+        this.hacs = new HACS(spartanToken);
     }
 
     /**
@@ -33,4 +41,28 @@ export default class Halo5
      * @return {Object} spartanStats
      */
     getSpartanStats = () => this.spartanStats
+
+    /**
+     * Get packs authority
+     * @return {Object} spartanStats
+     */
+    getPacks = () => this.packs
+
+    /**
+     * Get search authority
+     * @return {Object} search
+     */
+    getSearch = () => this.search
+
+    /**
+     * Get settings authority
+     * @return {Object} settings
+     */
+    getSettings = () => this.settings
+
+    /**
+     * Get HACS authority
+     * @return {Object} hacs
+     */
+    getHACS = () => this.hacs
 }

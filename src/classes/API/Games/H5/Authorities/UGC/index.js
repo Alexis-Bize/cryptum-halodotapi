@@ -28,7 +28,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getFilm = (id, options = {}) => this.call(
+    getFilmItem = (id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.FILM'), {
             id, options
@@ -42,7 +42,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getFilmManifest = (id, options = {}) => this.call(
+    getFilmItemManifest = (id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.FILM'), {
             id, query: {
@@ -73,7 +73,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPlayerMapVariant = (player, id, options = {}) => this.call(
+    getPlayerMapVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.MAP_VARIANT'), {
             player, id, options
@@ -102,7 +102,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPlayerGameVariant = (player, id, options = {}) => this.call(
+    getPlayerGameVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.GAME_VARIANT'), {
             player, id
@@ -131,7 +131,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPlayerForgeGroup = (player, id, options = {}) => this.call(
+    getPlayerForgeGroupItem = (player, id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.FORGE_GROUP'), {
             player, id, options
@@ -146,7 +146,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPlayerBookmark = (player, id, options = {}) => this.call(
+    getPlayerBookmarkedItem = (player, id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.BOOKMARK'), {
             player, id, options
@@ -218,7 +218,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerMapVariant = (player, id, body, options = {}) => this.call(
+    updatePlayerMapVariantItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.MAP_VARIANT'), {
             player, id, body, options
@@ -234,7 +234,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerGameVariant = (player, id, body, options = {}) => this.call(
+    updatePlayerGameVariantItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.GAME_VARIANT'), {
             player, id, body, options
@@ -250,7 +250,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerForgeGroup = (player, id, body, options = {}) => this.call(
+    updatePlayerForgeGroupItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.FORGE_GROUP'), {
             player, id, body, options
@@ -266,7 +266,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerBookmark = (player, id, body, options = {}) => this.call(
+    updatePlayerBookmarkItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.BOOKMARK'), {
             player, id, body, options
@@ -282,10 +282,25 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerFilm = (player, id, body = {}, options = {}) => this.call(
+    updatePlayerFilmItem = (player, id, body = {}, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.FILM'), {
             player, id, body, options
+        }
+    )
+
+    /**
+     * Create game variant
+     * @param {string} player 
+     * @param {Objecy} data
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    createGameVariant = (player, data, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.GAME_VARIANTS'), {
+            player, body: data, options
         }
     )
 
@@ -297,7 +312,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteMapVariant = (player, id, options = {}) => this.call(
+    deleteMapVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.MAP_VARIANT'), {
             player, id, options
@@ -312,7 +327,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteGameVariant = (player, id, options = {}) => this.call(
+    deleteGameVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.GAME_VARIANT'), {
             player, id, options
@@ -327,7 +342,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteForgeGroup = (player, id, options = {}) => this.call(
+    deleteForgeGroupItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.FORGE_GROUP'), {
             player, id, options
@@ -342,7 +357,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteBookmark = (player, id, options = {}) => this.call(
+    deleteBookmarkItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.BOOKMARK'), {
             player, id, options
@@ -358,7 +373,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyGameVariant = (player, id, ownerName = '', options = {}) => this.call(
+    copyGameVariantItem = (player, id, ownerName = '', options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'gamevariants', body: {
@@ -381,7 +396,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyMapVariant = (player, id, ownerName = '', options = {}) => this.call(
+    copyMapVariantItem = (player, id, ownerName = '', options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'mapvariants', body: {
@@ -404,7 +419,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyForgeGroup = (player, id, ownerName = '', options = {}) => this.call(
+    copyForgeGroupItem = (player, id, ownerName = '', options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'forgegroups', body: {
@@ -415,6 +430,23 @@ export default class UGC extends Request
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options
+        }
+    )
+
+    /**
+     * Post player files
+     * @param {string} player
+     * @param {Object} files
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    postBatchPlayerFiles = (player, files = {}, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.FILES'), {
+            player, body: files, options: Object.assign({}, options, {
+                'include-xuids': true
+            })
         }
     )
 }

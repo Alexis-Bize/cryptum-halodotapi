@@ -150,6 +150,14 @@ export default class Request
                 );
             }
 
+            if ((endpoint || '').length === 0) {
+                return reject(
+                    new HaloDotAPIError(
+                        getErrorByNamespaceKey('INTERNAL_ERROR')
+                    )
+                );
+            }
+
             parameters = this.formatParameters(parameters);
 
             const { body } = parameters;
@@ -157,10 +165,10 @@ export default class Request
                 options: {}
             };
 
-            if (
+            if (true !== options.unsetSpartanToken && (
                 endpoint.indexOf('svc.halowaypoint.com') !== -1 ||
                 endpoint.uri.indexOf('cloudapp.net') !== -1
-            ) options.query = Object.assign({}, options.query || {}, { auth: 'st' });
+            )) options.query = Object.assign({}, options.query || {}, { auth: 'st' });
 
             let requestOptions = {
                 method,
@@ -168,8 +176,6 @@ export default class Request
                 followRedirect: true,
                 gzip: true,
                 headers: Object.assign({}, {
-                    'X-343-Authorization-Spartan': this.getSpartanToken(),
-                    '343-Telemetry-Session-Id': this.getTelemetrySessionId(),
                     'Accept': HTTPContentTypes.JSON,
                     'Accept-Encoding': 'gzip',
                     'Accept-Language': 'en',
@@ -179,11 +185,28 @@ export default class Request
                 ) : {})
             };
 
+            if (true !== options.unsetSpartanToken) {
+                requestOptions.headers = Object.assign({}, {
+                    'X-343-Authorization-Spartan': this.getSpartanToken(),
+                    '343-Telemetry-Session-Id': this.getTelemetrySessionId(),
+                }, requestOptions.headers)
+            }
+
             if (true === _.isObject(options.query)) {
-                const query = queryString.stringify(options.query);
+
+                let cleanQuery = {};
+                let { query } = options; 
+
+                Object.keys(query).forEach(key => {
+                    cleanQuery[key.toLowerCase()] = query[key];
+                });
+
+                cleanQuery = queryString.stringify(cleanQuery);
+                
                 requestOptions.uri = requestOptions.uri.indexOf('?') === -1 ? (
-                    `${requestOptions.uri}?${query}`
-                ) : `${requestOptions.uri}&${query}`
+                    `${requestOptions.uri}?${cleanQuery}`
+                ) : `${requestOptions.uri}&${cleanQuery}`
+
             }
 
             if ('application/json' === requestOptions.headers['Accept']) {
@@ -195,7 +218,7 @@ export default class Request
                 HTTPMethods.POST,
                 HTTPMethods.PATCH
             ].indexOf(method) !== -1) {
-                requestOptions.body = JSON.stringify(body);
+                requestOptions.json = body;
                 requestOptions.headers['Content-Type'] = `${HTTPContentTypes.JSON}; charset=utf-8`
             }
 
@@ -261,7 +284,7 @@ export default class Request
                         return reject(
                             new HaloDotAPIError(
                                 getErrorByNamespaceKey('BAD_REQUEST'),
-                                { debug: responseInfo }
+                                { debug: responseInfo, responseBody }
                             )
                         );
 
