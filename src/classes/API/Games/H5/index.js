@@ -6,6 +6,7 @@ import SpartanStats from './Authorities/SpartanStats'
 import Packs from './Authorities/Packs'
 import Search from './Authorities/Search'
 import Settings from './Authorities/Settings'
+import BanProcessor from './Authorities/BanProcessor'
 import HACS from './Authorities/HACS'
 
 export default class Halo5
@@ -21,6 +22,7 @@ export default class Halo5
         this.packs = new Packs(spartanToken);
         this.search = new Search(spartanToken);
         this.settings = new Settings(spartanToken);
+        this.banprocessor = new BanProcessor(spartanToken);
         this.hacs = new HACS(spartanToken);
     }
 
@@ -59,6 +61,12 @@ export default class Halo5
      * @return {Object} settings
      */
     getSettings = () => this.settings
+
+    /**
+     * Get banprocessor authority
+     * @return {Object} settings
+     */
+    getBanProcessor = () => this.banprocessor
 
     /**
      * Get HACS authority

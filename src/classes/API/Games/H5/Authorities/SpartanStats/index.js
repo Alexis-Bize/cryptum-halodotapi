@@ -5,7 +5,7 @@ export default class SpartanStats extends Request
 {
     /**
      * Stats constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);
@@ -182,7 +182,9 @@ export default class SpartanStats extends Request
     getPlayersPresence = (players, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.SPARTAN_STATS.PRESENCE'), {
-            players, options
+            players, options: Object.assign({}, {
+                useTelemetrySpartanToken: true
+            }, options)
         }
     )
 }

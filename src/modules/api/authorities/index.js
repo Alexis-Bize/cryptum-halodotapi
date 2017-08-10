@@ -10,4 +10,5 @@ export default {
     HACS: 'https://content-hacs.svc.halowaypoint.com',
     ENTITLEMENTS: 'https://entitlements.svc.halowaypoint.com',
     SETTINGS: 'https://settings.svc.halowaypoint.com',
+    BANPROCESSOR: 'https://banprocessor.svc.halowaypoint.com'
 }

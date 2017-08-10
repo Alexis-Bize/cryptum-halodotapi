@@ -16,8 +16,11 @@ const errorNamespaces = {
     TOO_MANY_REQUESTS:          [6, HTTPStatus.TOO_MANY_REQUESTS, 'Too many requests'],
     BAD_REQUEST:                [7, HTTPStatus.BAD_REQUEST, 'Bad request'],
     REQUEST_TIMEOUT:            [8, HTTPStatus.REQUEST_TIMEOUT, 'Request timeout'],
+    // Misc
     UNKNOWN_GAME:               [30, HTTPStatus.BAD_REQUEST, 'Specified game does not exist: {0}'],
-    MALFORMATED_SPARTAN_TOKEN:  [40, HTTPStatus.UNAUTHORIZED, 'Malformated SpartanToken'],
+    // Spartan Token
+    SPARTAN_TOKEN_MALFORMATED:  [60, HTTPStatus.UNAUTHORIZED, 'Specified SpartanToken is malformated'],
+    SPARTAN_TOKEN_EXPIRED:      [61, HTTPStatus.UNAUTHORIZED, 'Specified SpartanToken has expired'],
 }
 
 export const getErrorByNamespaceKey = (namespace, keys = []) => {

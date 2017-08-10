@@ -5,7 +5,7 @@ export default class UGC extends Request
 {
     /**
      * UGC constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);

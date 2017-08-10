@@ -6,7 +6,7 @@ export default class HACS extends Request
 {   
     /**
      * HACS constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);
@@ -21,7 +21,7 @@ export default class HACS extends Request
      */
     getByType = (type, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.CUSTOM'), {
+        this.getEndpointByKey('H5.HACS.CUSTOM_TYPE'), {
             type, options: _.merge({
                 query: {
                     StartAt: 0,

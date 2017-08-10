@@ -5,7 +5,7 @@ export default class Search extends Request
 {
     /**
      * Search constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);

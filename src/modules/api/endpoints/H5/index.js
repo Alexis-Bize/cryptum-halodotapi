@@ -58,9 +58,12 @@ export default {
         GAME_VARIANT_DEFINITION: `${authorities.HACS}/contents/GameVariantDefinition`,
         GAME_BASE_VARIANT: `${authorities.HACS}/contents/GameBaseVariant`,
         MESSAGE_OF_THE_DAY: `${authorities.HACS}/contents/Halo5MessageoftheDay`,
-        CUSTOM: `${authorities.HACS}/contents/{type}`,
+        CUSTOM_TYPE: `${authorities.HACS}/contents/{type}`,
     },
     SETTINGS: {
         SPARTAN_TOKEN: `${authorities.SETTINGS}/spartan-token?v={version}`,
+    },
+    BANPROCESSOR: {
+        SUMMARY: `${authorities.BANPROCESSOR}/h5/bansummary?targets={players}`
     }
 }

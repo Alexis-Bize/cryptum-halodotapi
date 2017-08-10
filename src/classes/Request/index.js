@@ -18,11 +18,11 @@ export default class Request
 {
     /**
      * Request constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      * @param {string=} telemetrySessionId
      */
     constructor(spartanToken, telemetrySessionId = '') {
-        this.spartanToken = String(spartanToken || '');
+        this.spartanToken = spartanToken;
         this.telemetrySessionId = telemetrySessionId || createUUID();
     }
 
@@ -54,9 +54,18 @@ export default class Request
      * Check spartanToken format
      * @return {boolean}
      */
-    isSpartanTokenValid = () => /^v[2-3]=([a-zA-Z0-9;\-:_]+)$/g.test(
-        this.getSpartanToken()
+    hasSpartanTokenValidFormat = () => /^v[2-3]=([a-zA-Z0-9;\-:_]+)$/g.test(
+        this.getSpartanToken().concat
     )
+
+    /**
+     * Check spartanToken expiration
+     * @return {boolean}
+     */
+    hasSpartanTokenExpired = () => {
+        const expires = new Date(this.getSpartanToken().expires);
+        return expires.getTime() - 100 * 15 * 10 <= Date.now();
+    }
     
     formatParameters = parameters => {
 
@@ -142,18 +151,26 @@ export default class Request
 
         return new Promise((resolve, reject) => {
 
-            if (false === this.isSpartanTokenValid()) {
-                return reject(
-                    new HaloDotAPIError(
-                        getErrorByNamespaceKey('MALFORMATED_SPARTAN_TOKEN')
-                    )
-                );
-            }
-
             if ((endpoint || '').length === 0) {
                 return reject(
                     new HaloDotAPIError(
                         getErrorByNamespaceKey('INTERNAL_ERROR')
+                    )
+                );
+            }
+
+            if (false === this.hasSpartanTokenValidFormat()) {
+                return reject(
+                    new HaloDotAPIError(
+                        getErrorByNamespaceKey('SPARTAN_TOKEN_MALFORMATED')
+                    )
+                );
+            }
+
+            if (true === this.hasSpartanTokenExpired()) {
+                return reject(
+                    new HaloDotAPIError(
+                        getErrorByNamespaceKey('SPARTAN_TOKEN_EXPIRED')
                     )
                 );
             }
@@ -165,7 +182,8 @@ export default class Request
                 options: {}
             };
 
-            if (true !== options.unsetSpartanToken && (
+            if (true !== options.unsetSpartanToken &&
+                true !== options.useTelemetrySpartanToken && (
                 endpoint.indexOf('svc.halowaypoint.com') !== -1 ||
                 endpoint.uri.indexOf('cloudapp.net') !== -1
             )) options.query = Object.assign({}, options.query || {}, { auth: 'st' });
@@ -187,8 +205,12 @@ export default class Request
 
             if (true !== options.unsetSpartanToken) {
                 requestOptions.headers = Object.assign({}, {
-                    'X-343-Authorization-Spartan': this.getSpartanToken(),
-                    '343-Telemetry-Session-Id': this.getTelemetrySessionId(),
+                    'X-343-Authorization-Spartan': (
+                        true === options.useTelemetrySpartanToken ? (
+                            `${this.getSpartanToken().preamble}T;${this.getSpartanToken().token}`
+                        ) : this.getSpartanToken().concat
+                    ),
+                    '343-Telemetry-Session-Id': this.getTelemetrySessionId()
                 }, requestOptions.headers)
             }
 
@@ -209,7 +231,7 @@ export default class Request
 
             }
 
-            if ('application/json' === requestOptions.headers['Accept']) {
+            if (HTTPContentTypes.JSON === requestOptions.headers['Accept']) {
                 requestOptions.json = true;
             }
 
@@ -234,9 +256,7 @@ export default class Request
                 {
                     case HTTPStatus.SUCCESS:
                     case HTTPStatus.ACCEPTED:
-                        return resolve({
-                            data: responseBody
-                        });
+                        return resolve(responseBody);
 
                     case HTTPStatus.NOT_FOUND:
                         return reject(
@@ -284,7 +304,7 @@ export default class Request
                         return reject(
                             new HaloDotAPIError(
                                 getErrorByNamespaceKey('BAD_REQUEST'),
-                                { debug: responseInfo, responseBody }
+                                { debug: responseBody }
                             )
                         );
 
@@ -298,7 +318,8 @@ export default class Request
                     default:
                         return reject(
                             new HaloDotAPIError(
-                                getErrorByNamespaceKey('INTERNAL_ERROR')
+                                getErrorByNamespaceKey('INTERNAL_ERROR'),
+                                { debug: responseBody }
                             )
                         );
                 }

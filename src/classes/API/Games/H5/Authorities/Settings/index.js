@@ -6,7 +6,7 @@ export default class Settings extends Request
 {
     /**
      * Settings constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);

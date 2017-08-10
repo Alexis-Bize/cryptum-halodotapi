@@ -7,7 +7,7 @@ export default class Packs extends Request
 {
     /**
      * HaloPlayer constructor
-     * @param {string} spartanToken
+     * @param {Object} spartanToken
      */
     constructor(spartanToken) {
         super(spartanToken);
@@ -105,8 +105,4 @@ export default class Packs extends Request
             }, options
         }
     )
-
-    // TODO
-    // giftPackInstance = (player, packId, instanceId, options = {});
-    // sellCardInstance = (player, cardId, instanceId, options = {});
 }
