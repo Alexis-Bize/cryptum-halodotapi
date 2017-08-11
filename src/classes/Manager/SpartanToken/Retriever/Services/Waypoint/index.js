@@ -55,7 +55,7 @@ export default class WaypointService
 
     /**
      * Auth spartan
-     * @param {string} linearCodeUrl
+     * @param {string} authorizationCode
      * @throws HaloDotAPIError
      * @return Promise
      */
