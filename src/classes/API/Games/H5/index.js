@@ -13,17 +13,16 @@ export default class Halo5
 {
     /**
      * Halo5 constructor
-     * @param {string} spartanToken 
      */
-    constructor(spartanToken) {
-        this.ugc = new UGC(spartanToken);
-        this.haloPlayer = new HaloPlayer(spartanToken);
-        this.spartanStats = new SpartanStats(spartanToken);
-        this.packs = new Packs(spartanToken);
-        this.search = new Search(spartanToken);
-        this.settings = new Settings(spartanToken);
-        this.banprocessor = new BanProcessor(spartanToken);
-        this.hacs = new HACS(spartanToken);
+    constructor() {
+        this.ugc = new UGC();
+        this.haloPlayer = new HaloPlayer();
+        this.spartanStats = new SpartanStats();
+        this.packs = new Packs();
+        this.search = new Search();
+        this.settings = new Settings();
+        this.banprocessor = new BanProcessor();
+        this.hacs = new HACS();
     }
 
     /**

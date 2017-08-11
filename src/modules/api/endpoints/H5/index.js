@@ -61,7 +61,7 @@ export default {
         CUSTOM_TYPE: `${authorities.HACS}/contents/{type}`,
     },
     SETTINGS: {
-        SPARTAN_TOKEN: `${authorities.SETTINGS}/spartan-token?v={version}`,
+        
     },
     BANPROCESSOR: {
         SUMMARY: `${authorities.BANPROCESSOR}/h5/bansummary?targets={players}`

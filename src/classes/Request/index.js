@@ -1,7 +1,7 @@
 import request from 'request'
 import queryString from 'query-string'
-import { v4 as createUUID } from 'uuid'
 
+import SpartanTokenManager from '@classes/Manager/SpartanToken'
 import HaloDotAPIError, {
     getErrorByNamespaceKey
 } from '@classes/Errors'
@@ -16,28 +16,6 @@ import HTTPContentTypes from '@modules/http/content-types'
 
 export default class Request
 {
-    /**
-     * Request constructor
-     * @param {Object} spartanToken
-     * @param {string=} telemetrySessionId
-     */
-    constructor(spartanToken, telemetrySessionId = '') {
-        this.spartanToken = spartanToken;
-        this.telemetrySessionId = telemetrySessionId || createUUID();
-    }
-
-    /**
-     * Get spartan token
-     * @return {string}
-     */
-    getSpartanToken = () => this.spartanToken
-
-    /**
-     * Get telemetry session id
-     * @return {string}
-     */
-    getTelemetrySessionId = () => this.telemetrySessionId
-
     /**
      * Get endpoints
      * @return {Object}
@@ -55,15 +33,15 @@ export default class Request
      * @return {boolean}
      */
     hasSpartanTokenValidFormat = () => /^v[2-3]=([a-zA-Z0-9;\-:_]+)$/g.test(
-        this.getSpartanToken().concat
+        SpartanTokenManager.getSpartanToken().concat
     )
 
     /**
      * Check spartanToken expiration
      * @return {boolean}
      */
-    hasSpartanTokenExpired = () => {
-        const expires = new Date(this.getSpartanToken().expires);
+    isSpartanTokenExpired = () => {
+        const expires = new Date(SpartanTokenManager.getSpartanToken().expires);
         return expires.getTime() - 100 * 15 * 10 <= Date.now();
     }
     
@@ -145,7 +123,7 @@ export default class Request
      * @param {string} endpoint
      * @param {Object=} parameters
      * @throws HaloDotAPIError
-     * @return Promise
+     * @return {Object}
      */
     call = (method, endpoint, parameters = {}) => {
 
@@ -167,12 +145,21 @@ export default class Request
                 );
             }
 
-            if (true === this.hasSpartanTokenExpired()) {
-                return reject(
-                    new HaloDotAPIError(
-                        getErrorByNamespaceKey('SPARTAN_TOKEN_EXPIRED')
-                    )
-                );
+            if (true === this.isSpartanTokenExpired()) {
+
+                if (false === SpartanTokenManager.autoRenewOnExpiration()) {
+                    return reject(
+                        new HaloDotAPIError(
+                            getErrorByNamespaceKey('SPARTAN_TOKEN_EXPIRED')
+                        )
+                    );
+                }
+
+                return SpartanTokenManager.renew()
+                .then(() => this.call.apply(this, [
+                    method, endpoint, parameters
+                ])).catch(err => reject(err));
+
             }
 
             parameters = this.formatParameters(parameters);
@@ -195,8 +182,8 @@ export default class Request
                 gzip: true,
                 headers: Object.assign({}, {
                     'Accept': HTTPContentTypes.JSON,
-                    'Accept-Encoding': 'gzip',
-                    'Accept-Language': 'en',
+                    'Accept-Encoding': 'gzip, deflate',
+                    'Accept-Language': 'en-US',
                     'User-Agent': 'cpprestsdk/2.4.0'
                 }, _.isObject(options.headers) ? (
                     this.formatHeaders(options.headers)
@@ -207,10 +194,9 @@ export default class Request
                 requestOptions.headers = Object.assign({}, {
                     'X-343-Authorization-Spartan': (
                         true === options.useTelemetrySpartanToken ? (
-                            `${this.getSpartanToken().preamble}T;${this.getSpartanToken().token}`
-                        ) : this.getSpartanToken().concat
-                    ),
-                    '343-Telemetry-Session-Id': this.getTelemetrySessionId()
+                            `${SpartanTokenManager.getSpartanToken().preamble}T;${SpartanTokenManager.getSpartanToken().token}`
+                        ) : SpartanTokenManager.getSpartanToken().concat
+                    )
                 }, requestOptions.headers)
             }
 

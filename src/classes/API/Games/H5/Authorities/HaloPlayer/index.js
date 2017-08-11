@@ -7,10 +7,9 @@ export default class HaloPlayer extends Request
 {
     /**
      * HaloPlayer constructor
-     * @param {Object} spartanToken
      */
-    constructor(spartanToken) {
-        super(spartanToken);
+    constructor() {
+        super();
     }
 
     /**

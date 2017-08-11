@@ -6,11 +6,10 @@ import HTTPMethods from '@modules/http/methods'
 export default class Packs extends Request
 {
     /**
-     * HaloPlayer constructor
-     * @param {Object} spartanToken
+     * Packs constructor
      */
-    constructor(spartanToken) {
-        super(spartanToken);
+    constructor() {
+        super();
     }
 
     /**

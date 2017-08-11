@@ -8,8 +8,8 @@ export default class HACS extends Request
      * HACS constructor
      * @param {Object} spartanToken
      */
-    constructor(spartanToken) {
-        super(spartanToken);
+    constructor() {
+        super();
     }
 
     /**

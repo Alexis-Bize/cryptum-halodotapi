@@ -5,10 +5,9 @@ export default class SpartanStats extends Request
 {
     /**
      * Stats constructor
-     * @param {Object} spartanToken
      */
-    constructor(spartanToken) {
-        super(spartanToken);
+    constructor() {
+        super();
     }
 
     /**

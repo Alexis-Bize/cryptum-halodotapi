@@ -5,10 +5,9 @@ export default class BanProcessor extends Request
 {
     /**
      * BanProcessor constructor
-     * @param {Object} spartanToken
      */
-    constructor(spartanToken) {
-        super(spartanToken);
+    constructor() {
+        super();
     }
 
     /**
