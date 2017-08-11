@@ -14,8 +14,8 @@ Looking for variants or Forge groups? There is a **search endpoint** for that. W
 import HaloDotAPI from 'cryptum-halodotapi'
 
 const H5 = HaloDotAPI.initializeGame(
-	HaloDotAPI.getGames().H5, // h5
-	'...' // SpartanToken
+    HaloDotAPI.getGames().H5, // h5
+    '...' // SpartanToken
 );
 
 const H5HaloPlayer = H5.getHaloPlayer(); // Authority
@@ -89,16 +89,16 @@ let H5 = null;
 
 // Requires Xbox LIVE credentials
 HaloDotAPI.getSpartanTokenManager().generate(
-	'email@xboxlive.com',
-	'password'
+    'email@xboxlive.com',
+    'password'
 ).then(spartanToken => {
 
-	H5 = HaloDotAPI.initializeGame(
-		HaloDotAPI.getGames().H5,
-		spartanToken
-	);
-	
-	// ...
+    H5 = HaloDotAPI.initializeGame(
+        HaloDotAPI.getGames().H5,
+        spartanToken
+    );
+
+    // ...
 
 }).catch(error => console.log(error));
 
@@ -140,3 +140,5 @@ Note: Once retrieved / generated, your **SpartanToken** will expires after ~3 ho
 
 * `getBanProcessor()`:
 — Provides ban informations about Players.
+
+### REDACTING....

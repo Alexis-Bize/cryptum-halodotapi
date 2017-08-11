@@ -62,7 +62,7 @@ export default class WaypointService
     authSpartan = async authorizationCode => {
 
         const HaloXSTS = await this.retrieveHaloXSTS(authorizationCode);
-        const spartanToken = await this.retriveSpartanToken(HaloXSTS);
+        const spartanToken = await this.retrieveSpartanToken(HaloXSTS);
 
         return new Promise(resolve => {
             resolve(spartanToken);
@@ -133,7 +133,7 @@ export default class WaypointService
      * @throws HaloDotAPIError
      * @return Promise
      */
-    retriveSpartanToken = HaloXSTS => {
+    retrieveSpartanToken = HaloXSTS => {
 
         return new Promise((resolve, reject) => {
 
