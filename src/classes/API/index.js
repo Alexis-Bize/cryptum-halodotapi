@@ -1,12 +1,11 @@
 import path from 'path'
 
 import HaloDotAPIError, { getErrorByNamespaceKey } from '@classes/Errors'
-import SpartanTokenManager from '@classes/Manager/SpartanToken'
+import SpartanTokenManager from '@classes/Managers/SpartanToken'
 
 import _ from '@modules/helpers/lodash'
 import games from '@modules/api/games'
 import platforms from '@modules/api/platforms'
-
 
 class API
 {

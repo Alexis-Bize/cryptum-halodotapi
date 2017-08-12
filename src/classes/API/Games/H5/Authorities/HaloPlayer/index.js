@@ -58,7 +58,7 @@ export default class HaloPlayer extends Request
     getPlayersProfile = (players, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.BATCH_PROFILES'), {
-            players
+            players, options
         }
     )
 
@@ -72,7 +72,7 @@ export default class HaloPlayer extends Request
     getPlayerAppearance = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.APPEARANCE'), {
-            player
+            player, options
         }
     )
 
@@ -86,7 +86,7 @@ export default class HaloPlayer extends Request
     getPlayerInventory = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.INVENTORY'), {
-            player
+            player, options
         }
     )
 
@@ -100,7 +100,7 @@ export default class HaloPlayer extends Request
     getPlayerPreferences = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.PREFERENCES'), {
-            player
+            player, options
         }
     )
 
@@ -114,7 +114,7 @@ export default class HaloPlayer extends Request
     getPlayerControls = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.CONTROLS'), {
-            player
+            player, options
         }
     )
 
@@ -128,67 +128,67 @@ export default class HaloPlayer extends Request
     getPlayerCampaign = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.HALO_PLAYER.CAMPAIGN'), {
-            player
+            player, options
         }
     )
 
     /**
-     * Update player apperance
+     * Patch player apperance
      * @param {string} player
      * @param {Object} appearance
      * @param {Object=} options 
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerAppearance = (player, appearance, options = {}) => this.call(
+    patchPlayerAppearance = (player, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.HALO_PLAYER.APPEARANCE'), {
-            player, body: appearance
+            player, body, options
         }
     )
 
     /**
-     * Update player preferences
+     * Patch player preferences
      * @param {string} player
-     * @param {Object} preferences
+     * @param {Object} body
      * @param {Object=} options 
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerPreferences = (player, preferences, options = {}) => this.call(
+    patchPlayerPreferences = (player, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.HALO_PLAYER.PREFERENCES'), {
-            player, body: preferences
+            player, body, options
         }
     )
 
     /**
-     * Update player controls
+     * Patch player controls
      * @param {string} player
-     * @param {Object} controls
+     * @param {Object} body
      * @param {Object=} options 
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerControls = (player, controls, options = {}) => this.call(
+    patchPlayerControls = (player, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.HALO_PLAYER.CONTROLS'), {
-            player, body: controls
+            player, body, options
         }
     )
 
     /**
-     * Update player campaign
+     * Patch player campaign
      * @param {string} player
-     * @param {Object} campaign
+     * @param {Object} patchData
      * @param {Object=} options 
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerCampaign = (player, campaign, options = {}) => this.call(
+    patchPlayerCampaign = (player, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.HALO_PLAYER.CAMPAIGN'), {
-            player, body: campaign
+            player, body, options
         }
     )
 }

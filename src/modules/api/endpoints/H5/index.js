@@ -28,11 +28,11 @@ export default {
     HALO_PLAYER: {
         SPARTAN: `${authorities.HALO_PLAYER}/h5/profiles/{player}/spartan`,
         EMBLEM: `${authorities.HALO_PLAYER}/h5/profiles/{player}/emblem`,
-        APPEARANCE: `${authorities.HALO_PLAYER}/h5/profile/{player}/appearance`,
-        CAMPAIGN: `${authorities.HALO_PLAYER}/h5/profile/{player}/campaign`,
-        INVENTORY: `${authorities.HALO_PLAYER}/h5/profile/{player}/inventory`,
-        PREFERENCES: `${authorities.HALO_PLAYER}/h5/profile/{player}/preferences`,
-        CONTROLS: `${authorities.HALO_PLAYER}/h5/profile/{player}/controls`,
+        APPEARANCE: `${authorities.HALO_PLAYER}/h5/profiles/{player}/appearance`,
+        CAMPAIGN: `${authorities.HALO_PLAYER}/h5/profiles/{player}/campaign`,
+        INVENTORY: `${authorities.HALO_PLAYER}/h5/profiles/{player}/inventory`,
+        PREFERENCES: `${authorities.HALO_PLAYER}/h5/profiles/{player}/preferences`,
+        CONTROLS: `${authorities.HALO_PLAYER}/h5/profiles/{player}/controls`,
         BATCH_PROFILES: `${authorities.HALO_PLAYER}/h5/profiles?players={players}`,
     },
     PACKS: {

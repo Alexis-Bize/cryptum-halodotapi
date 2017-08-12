@@ -15,6 +15,8 @@ const RELYING_PARTIES = {
     DUMMY_XSTS: 'https://dummy-xsts-host.svc.halowaypoint.com/'
 }
 
+const SPARTAN_TOKEN_VERSION = 3
+
 const HEADERS = {
     'Accept-Language': 'en-US',
     'Accept-Encoding': 'gzip, deflate',
@@ -26,13 +28,11 @@ export default class WaypointService
     /**
      * WaypointService constructor
      * @param {string} clientId 
-     * @param {string} callbackUri 
-     * @param {number} spartanTokenVersion
+     * @param {string} callbackUri
      */
-    constructor(clientId, callbackUri, spartanTokenVersion) {
+    constructor(clientId, callbackUri) {
         this.clientId = clientId;
         this.callbackUri = callbackUri;
-        this.spartanTokenVersion = spartanTokenVersion;
     }
 
     /**
@@ -46,12 +46,6 @@ export default class WaypointService
      * @return {string} callbackUri
      */
     getCallbackUri = () => this.callbackUri
-
-    /**
-     * Get spartan token version
-     * @return {number} spartanTokenVersion
-     */
-    getSpartanTokenVersion = () => this.spartanTokenVersion
 
     /**
      * Auth spartan
@@ -138,7 +132,7 @@ export default class WaypointService
         return new Promise((resolve, reject) => {
 
             request({
-                uri: `https://settings.svc.halowaypoint.com/spartan-token?v=${this.getSpartanTokenVersion()}`,
+                uri: `https://settings.svc.halowaypoint.com/spartan-token?v=${SPARTAN_TOKEN_VERSION}`,
                 method: HTTPMethods.GET,
                 headers: Object.assign({}, HEADERS, {
                     'X-343-Authorization-XBL3': `XBL3.0 x=*;${HaloXSTS}`,

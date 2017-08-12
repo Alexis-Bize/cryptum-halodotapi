@@ -104,4 +104,48 @@ export default class Packs extends Request
             }, options
         }
     )
+
+    /**
+     * Patch pack instance
+     * @param {string} player
+     * @param {string} packId
+     * @param {string} instanceId
+     * @param {Object} body
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    patchPackInstance = (player, packId, instanceId, body, options = {}) => this.call(
+        HTTPMethods.PATCH,
+        this.getEndpointByKey('H5.PACKS.PACK_INSTANCE'), {
+            player, packId, instanceId, body: Object.assign({}, {
+                State: null,
+                Reason: null,
+                RequestorDetail: 'Halo 5 Client',
+                TrackingId: createUUID().toUpperCase()
+            }, body), options
+        }
+    )
+
+    /**
+     * Patch card instance
+     * @param {string} player
+     * @param {string} cardId
+     * @param {string} instanceId
+     * @param {Object} body
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    patchCardInstance = (player, cardId, instanceId, body, options = {}) => this.call(
+        HTTPMethods.PATCH,
+        this.getEndpointByKey('H5.PACKS.CARD_INSTANCE'), {
+            player, cardId, instanceId, body: Object.assign({}, {
+                State: null,
+                Reason: null,
+                RequestorDetail: 'Halo 5 Client',
+                TrackingId: createUUID().toUpperCase()
+            }, body), options
+        }
+    )
 }

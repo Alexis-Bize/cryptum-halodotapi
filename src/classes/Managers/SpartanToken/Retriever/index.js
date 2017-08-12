@@ -34,7 +34,7 @@ export default class SpartanTokenRetriever
      * @param {number} version
      * @return Promise
      */
-    retriveSpartanToken = async version => {
+    retriveSpartanToken = async () => {
 
         const live = new LiveService(
             CLIENT_ID,
@@ -49,8 +49,7 @@ export default class SpartanTokenRetriever
 
         const waypoint = new WaypointService(
             CLIENT_ID,
-            CALLBACK_URI,
-            version
+            CALLBACK_URI
         );
         
         const spartanToken = await waypoint.authSpartan(

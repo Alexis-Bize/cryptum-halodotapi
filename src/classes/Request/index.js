@@ -1,10 +1,8 @@
 import request from 'request'
 import queryString from 'query-string'
 
-import SpartanTokenManager from '@classes/Manager/SpartanToken'
-import HaloDotAPIError, {
-    getErrorByNamespaceKey
-} from '@classes/Errors'
+import HaloDotAPIError, { getErrorByNamespaceKey } from '@classes/Errors'
+import SpartanTokenManager from '@classes/Managers/SpartanToken'
 
 import _ from '@modules/helpers/lodash'
 import endpoints from '@modules/api/endpoints'
@@ -82,10 +80,7 @@ export default class Request
             );
         });
 
-        const { options } = parameters || {
-            options: {}
-        };
-
+        const { options = {} } = parameters;
         const platform = options.platform === platforms.PC ? (
             options.platform.toLowerCase()
         ) : '';
@@ -156,18 +151,16 @@ export default class Request
                 }
 
                 return SpartanTokenManager.renew()
-                .then(() => this.call.apply(this, [
-                    method, endpoint, parameters
-                ])).catch(err => reject(err));
+                .then(() => this.call.apply(this,
+                    [ method, endpoint, parameters ]
+                )).catch(err => reject(err));
 
             }
 
             parameters = this.formatParameters(parameters);
 
             const { body } = parameters;
-            const { options } = parameters || {
-                options: {}
-            };
+            const { options = {} } = parameters;
 
             if (true !== options.unsetSpartanToken &&
                 true !== options.useTelemetrySpartanToken && (

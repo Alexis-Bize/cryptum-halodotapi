@@ -1,8 +1,6 @@
 import Retriever from './Retriever'
 import _ from '@modules/helpers/lodash'
 
-const DEFAULT_SPARTAN_TOKEN_VERSION = 3
-
 class SpartanTokenManager
 {
     /**
@@ -129,15 +127,14 @@ class SpartanTokenManager
      * @throws HaloDotAPIError
      * @return Promise
      */
-    generate = async (email, password, autoRenew = true, version = DEFAULT_SPARTAN_TOKEN_VERSION) => {
+    generate = async (email, password, autoRenew = true) => {
 
         const retriever = new Retriever(email, password);
-        const spartanToken = await retriever.retriveSpartanToken(version);
+        const spartanToken = await retriever.retriveSpartanToken();
 
         return new Promise(resolve => {
-            this.setAutoRenewStatus(autoRenew)
-            .setEmail(email)
-            .setPassword(password);
+            this.setAutoRenewStatus(autoRenew);
+            this.setEmail(email).setPassword(password);
             return resolve(spartanToken);
         });
         

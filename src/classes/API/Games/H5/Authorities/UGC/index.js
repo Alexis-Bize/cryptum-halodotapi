@@ -209,7 +209,7 @@ export default class UGC extends Request
     )
 
     /**
-     * Update player map variant
+     * Patch player map variant
      * @param {string} player 
      * @param {string} id
      * @param {Object} body
@@ -217,7 +217,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerMapVariantItem = (player, id, body, options = {}) => this.call(
+    patchPlayerMapVariantItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.MAP_VARIANT'), {
             player, id, body, options
@@ -225,7 +225,7 @@ export default class UGC extends Request
     )
 
     /**
-     * Update player game variant
+     * Patch player game variant
      * @param {string} player 
      * @param {string} id
      * @param {Object} body
@@ -233,7 +233,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerGameVariantItem = (player, id, body, options = {}) => this.call(
+    patchPlayerGameVariantItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.GAME_VARIANT'), {
             player, id, body, options
@@ -241,7 +241,7 @@ export default class UGC extends Request
     )
 
     /**
-     * Update player forge group
+     * Patch player forge group
      * @param {string} player 
      * @param {string} id
      * @param {Object} body
@@ -249,7 +249,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerForgeGroupItem = (player, id, body, options = {}) => this.call(
+    patchPlayerForgeGroupItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.FORGE_GROUP'), {
             player, id, body, options
@@ -257,7 +257,7 @@ export default class UGC extends Request
     )
 
     /**
-     * Update player bookmark
+     * Patch player bookmark
      * @param {string} player 
      * @param {string} id
      * @param {Object} body
@@ -265,7 +265,7 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerBookmarkItem = (player, id, body, options = {}) => this.call(
+    patchPlayerBookmarkItem = (player, id, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.UGC.BOOKMARK'), {
             player, id, body, options
@@ -273,33 +273,47 @@ export default class UGC extends Request
     )
 
     /**
-     * Update player film
+     * Post game variant
      * @param {string} player 
-     * @param {string} id
-     * @param {Object} body
+     * @param {Objecy} body
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    updatePlayerFilmItem = (player, id, body = {}, options = {}) => this.call(
-        HTTPMethods.PATCH,
-        this.getEndpointByKey('H5.UGC.FILM'), {
-            player, id, body, options
+    postGameVariant = (player, body, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.GAME_VARIANTS'), {
+            player, body, options
         }
     )
 
     /**
-     * Create game variant
+     * Post game variant
      * @param {string} player 
-     * @param {Objecy} data
+     * @param {Objecy} body
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    createGameVariant = (player, data, options = {}) => this.call(
+    postMapVariant = (player, body, options = {}) => this.call(
         HTTPMethods.POST,
-        this.getEndpointByKey('H5.UGC.GAME_VARIANTS'), {
-            player, body: data, options
+        this.getEndpointByKey('H5.UGC.MAP_VARIANTS'), {
+            player, body, options
+        }
+    )
+
+    /**
+     * Post game variant
+     * @param {string} player 
+     * @param {Objecy} body
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    postForgeGroup = (player, body, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.FORGE_GROUPS'), {
+            player, body, options
         }
     )
 
@@ -440,12 +454,10 @@ export default class UGC extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    postBatchPlayerFiles = (player, files = {}, options = {}) => this.call(
+    postBatchPlayerFiles = (player, body, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.FILES'), {
-            player, body: files, options: Object.assign({}, options, {
-                'include-xuids': true
-            })
+            player, body, options
         }
     )
 }
