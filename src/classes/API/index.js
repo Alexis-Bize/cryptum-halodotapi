@@ -2,10 +2,13 @@ import path from 'path'
 
 import HaloDotAPIError, { getErrorByNamespaceKey } from '@classes/Errors'
 import SpartanTokenManager from '@classes/Managers/SpartanToken'
+import Canvas from './Canvas'
 
 import _ from '@modules/helpers/lodash'
 import games from '@modules/api/games'
 import platforms from '@modules/api/platforms'
+
+import HTTPMethods from '@modules/http/methods'
 
 class API
 {
@@ -28,6 +31,12 @@ class API
     getPlatforms = () => platforms
 
     /**
+     * Get HTTP methods
+     * @return {Object} HTTPMethods
+     */
+    getHTTPMethods = () => HTTPMethods
+
+    /**
      * Get handlers
      * @return {Object} Handlers
      */
@@ -40,12 +49,21 @@ class API
      * @throws HaloDotAPIError
      * @return {Object} Class
      */
-    initializeGame = (game = '', spartanToken) => {
+    initializeGame = (game, spartanToken) => {
 
-        game = game.toUpperCase();
+        game = (game || '').toUpperCase();
         const games = this.getGames();
 
-        if (false === Object.keys(games).some(game => games[game] === game)) {
+        if (game.length === 0) {
+            throw new HaloDotAPIError(
+                getErrorByNamespaceKey(
+                    'MISSING_PARAMETER',
+                    [ 'game' ]
+                )
+            )
+        }
+
+        if (false === Object.keys(games).some(g => games[g] === game)) {
             throw new HaloDotAPIError(
                 getErrorByNamespaceKey(
                     'UNKNOWN_GAME',
@@ -54,21 +72,56 @@ class API
             )
         }
         
+        if (undefined === spartanToken) {
+            throw new HaloDotAPIError(
+                getErrorByNamespaceKey(
+                    'MISSING_PARAMETER',
+                    [ 'spartanToken' ]
+                )
+            )
+        }
+        
         const GameClass = require(
             path.join(__dirname, 'Games', game)
         ).default;
-        
-        if (undefined === spartanToken) {
-            throw new HaloDotAPIError(
-                getErrorByNamespaceKey('SPARTAN_TOKEN_MISSING')
-            )
-        }
 
         this.getSpartanTokenManager().setSpartanToken(
             spartanToken
         );
 
         return new GameClass();
+
+    }
+
+    /**
+     * Initialize CanvasClass
+     * @throws HaloDotAPIError
+     * @return {Object} Class
+     */
+    initializeCanvas = game => {
+
+        game = (game || '').toUpperCase();
+        const games = this.getGames();
+
+        if (game.length === 0) {
+            throw new HaloDotAPIError(
+                getErrorByNamespaceKey(
+                    'MISSING_PARAMETER',
+                    [ 'game' ]
+                )
+            )
+        }
+
+        if (true === Object.keys(games).some(g => games[g] === game)) {
+            throw new HaloDotAPIError(
+                getErrorByNamespaceKey(
+                    'DUPLICATE_ENTRY',
+                    [ game ]
+                )
+            )
+        }
+
+        return new Canvas(game);
 
     }
 }

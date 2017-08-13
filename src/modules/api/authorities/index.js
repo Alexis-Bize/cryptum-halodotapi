@@ -6,7 +6,7 @@ export default {
     HALO_PLAYER: 'https://haloplayer.svc.halowaypoint.com',
     PRESENCE: 'https://presence.svc.halowaypoint.com',
     TELEMETRY: 'https://telemetry.svc.halowaypoint.com',
-    SEARCH: 'https://seatch.svc.halowaypoint.com',
+    SEARCH: 'https://search.svc.halowaypoint.com',
     HACS: 'https://content-hacs.svc.halowaypoint.com',
     ENTITLEMENTS: 'https://entitlements.svc.halowaypoint.com',
     SETTINGS: 'https://settings.svc.halowaypoint.com',

@@ -11,16 +11,6 @@ export default class UGC extends Request
     }
 
     /**
-     * Set new spartan token
-     * @param {string} spartanToken
-     * @return {Object} this
-     */
-    setSpartanToken = spartanToken => {
-        this.spartanToken = spartanToken;
-        return this;
-    }
-
-    /**
      * Get film
      * @param {string} id
      * @param {Object=} options
@@ -273,14 +263,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Post game variant
+     * Post player game variant
      * @param {string} player 
      * @param {Objecy} body
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    postGameVariant = (player, body, options = {}) => this.call(
+    postPlayerGameVariant = (player, body, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.GAME_VARIANTS'), {
             player, body, options
@@ -288,14 +278,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Post game variant
+     * Post player game variant
      * @param {string} player 
      * @param {Objecy} body
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    postMapVariant = (player, body, options = {}) => this.call(
+    postPlayerMapVariant = (player, body, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.MAP_VARIANTS'), {
             player, body, options
@@ -303,14 +293,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Post game variant
+     * Post player game variant
      * @param {string} player 
      * @param {Objecy} body
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    postForgeGroup = (player, body, options = {}) => this.call(
+    postPlayerForgeGroup = (player, body, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.FORGE_GROUPS'), {
             player, body, options
@@ -318,14 +308,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Delete map variant
+     * Delete player map variant
      * @param {string} player 
      * @param {string} id
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteMapVariantItem = (player, id, options = {}) => this.call(
+    deletePlayerMapVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.MAP_VARIANT'), {
             player, id, options
@@ -333,14 +323,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Delete game variant
+     * Delete player game variant
      * @param {string} player 
      * @param {string} id
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteGameVariantItem = (player, id, options = {}) => this.call(
+    deletePlayerGameVariantItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.GAME_VARIANT'), {
             player, id, options
@@ -348,14 +338,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Delete forge group
+     * Delete player forge group
      * @param {string} player 
      * @param {string} id
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteForgeGroupItem = (player, id, options = {}) => this.call(
+    deletePlayerForgeGroupItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.FORGE_GROUP'), {
             player, id, options
@@ -363,14 +353,14 @@ export default class UGC extends Request
     )
 
     /**
-     * Delete bookmark
+     * Delete player bookmark
      * @param {string} player 
      * @param {string} id
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    deleteBookmarkItem = (player, id, options = {}) => this.call(
+    deletePlayerBookmarkItem = (player, id, options = {}) => this.call(
         HTTPMethods.DELETE,
         this.getEndpointByKey('H5.UGC.BOOKMARK'), {
             player, id, options

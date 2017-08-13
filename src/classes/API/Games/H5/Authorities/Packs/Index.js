@@ -13,13 +13,13 @@ export default class Packs extends Request
     }
 
     /**
-     * Get packs
+     * Get player packs
      * @param {string} player
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPacks = (player, options = {}) => this.call(
+    getPlayerPacks = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.PACKS.PACKS'), {
             player, options
@@ -27,14 +27,14 @@ export default class Packs extends Request
     )
 
     /**
-     * Get pack item
+     * Get player pack item
      * @param {string} player
      * @param {string} packId
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getPackItem = (player, packId, options = {}) => this.call(
+    getPlayerPackItem = (player, packId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.PACKS.PACK'), {
             player, packId, options
@@ -42,13 +42,13 @@ export default class Packs extends Request
     )
 
     /**
-     * Get cards
+     * Get player cards
      * @param {string} player
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getCards = (player, options = {}) => this.call(
+    getPlayerCards = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.PACKS.CARDS'), {
             player, options
@@ -56,14 +56,14 @@ export default class Packs extends Request
     )
 
     /**
-     * Get card item
+     * Get player card item
      * @param {string} player
      * @param {string} cardId
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getCardItem = (player, cardId, options = {}) => this.call(
+    getPlayerCardItem = (player, cardId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.PACKS.CARD'), {
             player, cardId, options
@@ -71,13 +71,13 @@ export default class Packs extends Request
     )
 
     /**
-     * Get store
+     * Get player store
      * @param {string} player
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    getStore = (player, options = {}) => this.call(
+    getPlayerStore = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.PACKS.STORE'), {
             player, options
@@ -85,7 +85,7 @@ export default class Packs extends Request
     )
 
     /**
-     * Open pack instance
+     * Open player pack instance
      * @param {string} player
      * @param {string} packId
      * @param {string} instanceId
@@ -93,7 +93,7 @@ export default class Packs extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    openPackInstance = (player, packId, instanceId, options = {}) => this.call(
+    openPlayerPackInstance = (player, packId, instanceId, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.PACKS.PACK_INSTANCE'), {
             player, packId, instanceId, body: {
@@ -106,7 +106,7 @@ export default class Packs extends Request
     )
 
     /**
-     * Patch pack instance
+     * Patch player pack instance
      * @param {string} player
      * @param {string} packId
      * @param {string} instanceId
@@ -115,7 +115,7 @@ export default class Packs extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    patchPackInstance = (player, packId, instanceId, body, options = {}) => this.call(
+    patchPlayerPackInstance = (player, packId, instanceId, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.PACKS.PACK_INSTANCE'), {
             player, packId, instanceId, body: Object.assign({}, {
@@ -137,7 +137,7 @@ export default class Packs extends Request
      * @throws HaloDotAPIError
      * @return Promise
      */
-    patchCardInstance = (player, cardId, instanceId, body, options = {}) => this.call(
+    patchPlayerCardInstance = (player, cardId, instanceId, body, options = {}) => this.call(
         HTTPMethods.PATCH,
         this.getEndpointByKey('H5.PACKS.CARD_INSTANCE'), {
             player, cardId, instanceId, body: Object.assign({}, {

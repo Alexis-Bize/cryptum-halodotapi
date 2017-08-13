@@ -1,7 +1,7 @@
 import request from 'request'
 import queryString from 'query-string'
 
-import HaloDotAPIError, { getErrorByNamespaceKey } from '@classes/Errors'
+import HaloDotAPIError, { getErrorByNamespaceKey, getErrorByHTTPStatusCode } from '@classes/Errors'
 import SpartanTokenManager from '@classes/Managers/SpartanToken'
 
 import _ from '@modules/helpers/lodash'
@@ -123,7 +123,7 @@ export default class Request
     call = (method, endpoint, parameters = {}) => {
 
         return new Promise((resolve, reject) => {
-
+            
             if ((endpoint || '').length === 0) {
                 return reject(
                     new HaloDotAPIError(
@@ -135,7 +135,7 @@ export default class Request
             if (false === this.hasSpartanTokenValidFormat()) {
                 return reject(
                     new HaloDotAPIError(
-                        getErrorByNamespaceKey('SPARTAN_TOKEN_MALFORMATED')
+                        getErrorByNamespaceKey('MALFORMATED_AUTHORIZATION')
                     )
                 );
             }
@@ -145,7 +145,7 @@ export default class Request
                 if (false === SpartanTokenManager.autoRenewOnExpiration()) {
                     return reject(
                         new HaloDotAPIError(
-                            getErrorByNamespaceKey('SPARTAN_TOKEN_EXPIRED')
+                            getErrorByNamespaceKey('AUTHORIZATION_EXPIRED')
                         )
                     );
                 }
@@ -186,9 +186,10 @@ export default class Request
             if (true !== options.unsetSpartanToken) {
                 requestOptions.headers = Object.assign({}, {
                     'X-343-Authorization-Spartan': (
-                        true === options.useTelemetrySpartanToken ? (
-                            `${SpartanTokenManager.getSpartanToken().preamble}T;${SpartanTokenManager.getSpartanToken().token}`
-                        ) : SpartanTokenManager.getSpartanToken().concat
+                        true === options.useTelemetrySpartanToken ? [
+                            `${SpartanTokenManager.getSpartanToken().preamble}`,
+                            `${SpartanTokenManager.getSpartanToken().token}`
+                        ].join('T;') : SpartanTokenManager.getSpartanToken().concat
                     )
                 }, requestOptions.headers)
             }
@@ -237,67 +238,10 @@ export default class Request
                     case HTTPStatus.ACCEPTED:
                         return resolve(responseBody);
 
-                    case HTTPStatus.NOT_FOUND:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('NOT_FOUND')
-                            )
-                        );
-
-                    case HTTPStatus.UNAUTHORIZED:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('UNAUTHORIZED')
-                            )
-                        );
-
-                    case HTTPStatus.AUTH_REQUIRED:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('AUTH_REQUIRED')
-                            )
-                        );
-
-                    case HTTPStatus.METHOD_NOT_ALLOWED:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('METHOD_NOT_ALLOWED')
-                            )
-                        );
-
-                    case HTTPStatus.SERVICE_UNAVAILABLE:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('SERVICE_UNAVAILABLE')
-                            )
-                        );
-
-                    case HTTPStatus.TOO_MANY_REQUESTS:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('TOO_MANY_REQUESTS')
-                            )
-                        );
-
-                    case HTTPStatus.BAD_REQUEST:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('BAD_REQUEST'),
-                                { debug: responseBody }
-                            )
-                        );
-
-                    case HTTPStatus.REQUEST_TIMEOUT:
-                        return reject(
-                            new HaloDotAPIError(
-                                getErrorByNamespaceKey('REQUEST_TIMEOUT')
-                            )
-                        );
-
                     default:
                         return reject(
                             new HaloDotAPIError(
-                                getErrorByNamespaceKey('INTERNAL_ERROR'),
+                                getErrorByHTTPStatusCode(statusCode),
                                 { debug: responseBody }
                             )
                         );
