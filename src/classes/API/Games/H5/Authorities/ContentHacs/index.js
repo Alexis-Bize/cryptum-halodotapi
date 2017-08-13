@@ -2,10 +2,10 @@ import _ from '@modules/helpers/lodash'
 import Request from '@classes/Request'
 import HTTPMethods from '@modules/http/methods'
 
-export default class HACS extends Request
+export default class ContentHacs extends Request
 {   
     /**
-     * HACS constructor
+     * ContentHacs constructor
      * @param {Object} spartanToken
      */
     constructor() {
@@ -21,7 +21,7 @@ export default class HACS extends Request
      */
     getByType = (type, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.CUSTOM_TYPE'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.CUSTOM_TYPE'), {
             type, options: _.merge({
                 query: {
                     StartAt: 0,
@@ -40,7 +40,7 @@ export default class HACS extends Request
      */
     getREQs = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.REQ'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.REQ'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -59,7 +59,7 @@ export default class HACS extends Request
      */
     getEmblems = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.EMBLEM'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.EMBLEM'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -78,7 +78,7 @@ export default class HACS extends Request
      */
     getHoppers = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.HOPPER'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.HOPPER'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -97,7 +97,7 @@ export default class HACS extends Request
      */
     getWeaponsSkins = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.WEAPON_SKIN'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.WEAPON_SKIN'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -116,7 +116,7 @@ export default class HACS extends Request
      */
     getGameVariantsDefinitions = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.GAME_VARIANT_DEFINITION'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.GAME_VARIANT_DEFINITION'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -135,7 +135,7 @@ export default class HACS extends Request
      */
     getGameBaseVariants = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.GAME_BASE_VARIANT'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.GAME_BASE_VARIANT'), {
             options: _.merge({
                 query: {
                     StartAt: 0,
@@ -154,7 +154,7 @@ export default class HACS extends Request
      */
     getMessageOfTheDay = (options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.HACS.MESSAGE_OF_THE_DAY'), {
+        this.getEndpointByKey('H5.CONTENT_HACS.MESSAGE_OF_THE_DAY'), {
             options: _.merge({
                 query: {
                     StartAt: 0,

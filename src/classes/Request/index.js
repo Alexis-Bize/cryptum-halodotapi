@@ -224,6 +224,8 @@ export default class Request
                 requestOptions.headers['Content-Type'] = `${HTTPContentTypes.JSON}; charset=utf-8`
             }
 
+            console.log(requestOptions.uri)
+
             request(requestOptions, (responseError, responseInfo, responseBody) => {
 
                 if (responseError) {

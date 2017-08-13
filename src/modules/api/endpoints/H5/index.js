@@ -2,7 +2,7 @@ import authorities from '@modules/api/authorities'
 
 export default {
     UGC: {
-        FILM: `${authorities.UGC}/h5/film/{id}`,
+        FILM: `${authorities.UGC}/h5/films/{id}`,
         FILES: `${authorities.UGC}/h5/playerfiles`,
         MAP_VARIANTS: `${authorities.UGC}/h5/players/{player}/mapvariants`,
         MAP_VARIANT: `${authorities.UGC}/h5/players/{player}/mapvariants/{id}`,
@@ -16,7 +16,7 @@ export default {
     },
     SPARTAN_STATS: {
         MATCHES: `${authorities.SPARTAN_STATS}/h5[platform]/players/{player}/matches`,
-        MATCH_EVENTS: `${authorities.SPARTAN_STATS}/h5[platform]/matches/{id}/events`,
+        MATCH_EVENTS: `${authorities.SPARTAN_STATS}/h5[platform]/{mode}/matches/{id}/events`,
         MATCH: `${authorities.SPARTAN_STATS}/h5[platform]/{mode}/matches/{id}`,
         CREDITS: `${authorities.SPARTAN_STATS}/h5/players/{player}/credits`,
         PRESENCE: `${authorities.SPARTAN_STATS}/h5/presence?players={players}`,
@@ -50,15 +50,15 @@ export default {
         GAME_VARIANTS: `${authorities.SEARCH}/h5/search/gamevariants?query={search}`,
         PLAYER_FILES: `${authorities.SEARCH}/h5/search/playerfiles?query={search}`
     },
-    HACS: {
-        REQ: `${authorities.HACS}/contents/REQ`,
-        EMBLEM: `${authorities.HACS}/contents/Emblem`,
-        HOPPER: `${authorities.HACS}/contents/Hopper`,
-        WEAPON_SKIN: `${authorities.HACS}/contents/WeaponSkin`,
-        GAME_VARIANT_DEFINITION: `${authorities.HACS}/contents/GameVariantDefinition`,
-        GAME_BASE_VARIANT: `${authorities.HACS}/contents/GameBaseVariant`,
-        MESSAGE_OF_THE_DAY: `${authorities.HACS}/contents/Halo5MessageoftheDay`,
-        CUSTOM_TYPE: `${authorities.HACS}/contents/{type}`,
+    CONTENT_HACS: {
+        REQ: `${authorities.CONTENT_HACS}/contents/REQ`,
+        EMBLEM: `${authorities.CONTENT_HACS}/contents/Emblem`,
+        HOPPER: `${authorities.CONTENT_HACS}/contents/Hopper`,
+        WEAPON_SKIN: `${authorities.CONTENT_HACS}/contents/WeaponSkin`,
+        GAME_VARIANT_DEFINITION: `${authorities.CONTENT_HACS}/contents/GameVariantDefinition`,
+        GAME_BASE_VARIANT: `${authorities.CONTENT_HACS}/contents/GameBaseVariant`,
+        MESSAGE_OF_THE_DAY: `${authorities.CONTENT_HACS}/contents/Halo5MessageoftheDay`,
+        CUSTOM_TYPE: `${authorities.CONTENT_HACS}/contents/{type}`,
     },
     SETTINGS: {
         

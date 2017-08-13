@@ -1,3 +1,4 @@
+import _ from '@modules/helpers/lodash'
 import Request from '@classes/Request'
 import HTTPMethods from '@modules/http/methods'
 
@@ -34,9 +35,11 @@ export default class UGC extends Request
     getFilmItemManifest = (id, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.FILM'), {
-            id, query: {
-                view: 'film-manifest'
-            }, options
+            id, options: _.merge({
+                query: {
+                    view: 'film-manifest'
+                }
+            }, options)
         }
     )
 

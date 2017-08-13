@@ -60,34 +60,6 @@ export default class SpartanStats extends Request
     )
 
     /**
-     * Get match data
-     * @param {string} matchId
-     * @param {Object=} options
-     * @throws HaloDotAPIError
-     * @return Promise
-     */
-    getMatchData = (matchId, options = {}) => this.call(
-        HTTPMethods.GET,
-        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH'), {
-            matchId, options
-        }
-    )
-
-    /**
-     * Get match events
-     * @param {string} matchId
-     * @param {Object=} options
-     * @throws HaloDotAPIError
-     * @return Promise
-     */
-    getMatchEvents = (matchId, options = {}) => this.call(
-        HTTPMethods.GET,
-        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
-            matchId, options
-        }
-    )
-
-    /**
      * Get campaign match result
      * @param {string} matchId
      * @param {Object=} options
@@ -139,6 +111,62 @@ export default class SpartanStats extends Request
     getCustomMatchResult = (matchId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.SPARTAN_STATS.MATCHES'), {
+            matchId, options, mode: 'custom'
+        }
+    )
+
+    /**
+     * Get campaign match events
+     * @param {string} matchId
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    getCampaignMatchEvents = (matchId, options = {}) => this.call(
+        HTTPMethods.GET,
+        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
+            matchId, options, mode: 'campaign'
+        }
+    )
+
+    /**
+     * Get arena match events
+     * @param {string} matchId
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    getArenaMatchEvents = (matchId, options = {}) => this.call(
+        HTTPMethods.GET,
+        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
+            matchId, options, mode: 'arena'
+        }
+    )
+
+    /**
+     * Get warzone match events
+     * @param {string} matchId
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    getWarzoneMatchEvents = (matchId, options = {}) => this.call(
+        HTTPMethods.GET,
+        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
+            matchId, options, mode: 'warzone'
+        }
+    )
+
+    /**
+     * Get custom match events
+     * @param {string} matchId
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    getCustomMatchEvents = (matchId, options = {}) => this.call(
+        HTTPMethods.GET,
+        this.getEndpointByKey('H5.SPARTAN_STATS.MATCH_EVENTS'), {
             matchId, options, mode: 'custom'
         }
     )

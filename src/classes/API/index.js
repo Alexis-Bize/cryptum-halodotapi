@@ -2,7 +2,6 @@ import path from 'path'
 
 import HaloDotAPIError, { getErrorByNamespaceKey } from '@classes/Errors'
 import SpartanTokenManager from '@classes/Managers/SpartanToken'
-import Canvas from './Canvas'
 
 import _ from '@modules/helpers/lodash'
 import games from '@modules/api/games'
@@ -90,38 +89,6 @@ class API
         );
 
         return new GameClass();
-
-    }
-
-    /**
-     * Initialize CanvasClass
-     * @throws HaloDotAPIError
-     * @return {Object} Class
-     */
-    initializeCanvas = game => {
-
-        game = (game || '').toUpperCase();
-        const games = this.getGames();
-
-        if (game.length === 0) {
-            throw new HaloDotAPIError(
-                getErrorByNamespaceKey(
-                    'MISSING_PARAMETER',
-                    [ 'game' ]
-                )
-            )
-        }
-
-        if (true === Object.keys(games).some(g => games[g] === game)) {
-            throw new HaloDotAPIError(
-                getErrorByNamespaceKey(
-                    'DUPLICATE_ENTRY',
-                    [ game ]
-                )
-            )
-        }
-
-        return new Canvas(game);
 
     }
 }

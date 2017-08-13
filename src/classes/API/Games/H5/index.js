@@ -1,5 +1,3 @@
-import path from 'path'
-
 import UGC from './Authorities/UGC'
 import HaloPlayer from './Authorities/HaloPlayer'
 import SpartanStats from './Authorities/SpartanStats'
@@ -7,12 +5,12 @@ import Packs from './Authorities/Packs'
 import Search from './Authorities/Search'
 import Settings from './Authorities/Settings'
 import BanProcessor from './Authorities/BanProcessor'
-import HACS from './Authorities/HACS'
+import ContentHacs from './Authorities/ContentHacs'
 
-export default class Halo5
+export default class H5
 {
     /**
-     * Halo5 constructor
+     * H5 constructor
      */
     constructor() {
         this.ugc = new UGC();
@@ -22,7 +20,7 @@ export default class Halo5
         this.search = new Search();
         this.settings = new Settings();
         this.banprocessor = new BanProcessor();
-        this.hacs = new HACS();
+        this.contentHacs = new ContentHacs();
     }
 
     /**
@@ -68,8 +66,8 @@ export default class Halo5
     getBanProcessor = () => this.banprocessor
 
     /**
-     * Get HACS authority
+     * Get content HACS authority
      * @return {Object} hacs
      */
-    getHACS = () => this.hacs
+    getContentHacs = () => this.ContentHacs
 }
