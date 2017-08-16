@@ -9,7 +9,8 @@
         "lodash.merge": "4.6.x",
         "lodash.get": "4.4.x",
         "query-string": "5.0.x",
-        "request": "2.81.x"
+        "request": "2.81.x",
+        "uuid": "3.1.x"
     },
     "devDependencies": {
         "babel-cli": "6.24.x",
