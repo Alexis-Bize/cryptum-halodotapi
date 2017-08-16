@@ -939,7 +939,7 @@ H5.getPacks().getPlayerCardItem('PLAYER', 'CARD_ITEM_ID')
 	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getPacks().getPlayerCardItem('PLAYER')
+H5.getPacks().getPlayerStore('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -953,7 +953,7 @@ H5.getPacks().getPlayerCardItem('PLAYER')
 	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getPacks().getPlayerCardItem('PLAYER', 'PACK_ITEM_ID', 'PACK_INSTANCE_ID')
+H5.getPacks().openPlayerPackInstance('PLAYER', 'PACK_ITEM_ID', 'PACK_INSTANCE_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
