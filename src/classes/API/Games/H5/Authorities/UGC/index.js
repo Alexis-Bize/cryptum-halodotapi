@@ -154,7 +154,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedMapVariants = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
             player, options, targetType: 'mapvariant'
         }
     )
@@ -168,7 +168,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedGameVariants = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
             player, options, targetType: 'gamevariant'
         }
     )
@@ -182,7 +182,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedForgeGroups = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
             player, options, targetType: 'forgegroup'
         }
     )
@@ -196,7 +196,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedFilms = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
             player, options, targetType: 'film'
         }
     )
@@ -386,7 +386,7 @@ export default class UGC extends Request
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'GameVariant',
-                    Owner: ownerName,
+                    Owner: ownerName || null,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options
@@ -409,7 +409,7 @@ export default class UGC extends Request
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'MapVariant',
-                    Owner: ownerName,
+                    Owner: ownerName || null,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options
@@ -432,8 +432,111 @@ export default class UGC extends Request
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'ForgeGroup',
-                    Owner: ownerName,
+                    Owner: ownerName || null,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
+                }
+            }, options
+        }
+    )
+
+    /**
+     * Bookmark game variant item
+     * @param {string} player
+     * @param {string} id
+     * @param {string} ownerName
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    bookmarkGameVariantItem = (player, id, ownerName, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, body: {
+                Name: 'Cryptum - GameVariant',
+                Description: 'cryptum-halodotapi',
+                AccessControl: 0,
+                Target: {
+                    ResourceId: id,
+                    ResourceType: 'GameVariant',
+                    Owner: ownerName,
+                    OwnerType: 'UgcPlayer'
+                }
+            }, options
+        }
+    )
+
+    /**
+     * Bookmark map variant item
+     * @param {string} player
+     * @param {string} id
+     * @param {string} ownerName
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    bookmarkMapVariantItem = (player, id, ownerName, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, body: {
+                Name: 'Cryptum - MapVariant',
+                Description: 'cryptum-halodotapi',
+                AccessControl: 0,
+                Target: {
+                    ResourceId: id,
+                    ResourceType: 'MapVariant',
+                    Owner: ownerName,
+                    OwnerType: 'UgcPlayer'
+                }
+            }, options
+        }
+    )
+
+    /**
+     * Bookmark forge group item
+     * @param {string} player
+     * @param {string} id
+     * @param {string} ownerName
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    bookmarkForgeGroupItem = (player, id, ownerName, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, body: {
+                Name: 'Cryptum - ForgeGroup',
+                Description: 'cryptum-halodotapi',
+                AccessControl: 0,
+                Target: {
+                    ResourceId: id,
+                    ResourceType: 'ForgeGroup',
+                    Owner: ownerName,
+                    OwnerType: 'UgcPlayer'
+                }
+            }, options
+        }
+    )
+
+    /**
+     * Bookmark film item
+     * @param {string} player
+     * @param {string} id
+     * @param {Object=} options
+     * @throws HaloDotAPIError
+     * @return Promise
+     */
+    bookmarkFilmItem = (player, id, options = {}) => this.call(
+        HTTPMethods.POST,
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, body: {
+                Name: 'Cryptum - Film',
+                Description: 'cryptum-halodotap',
+                AccessControl: 0,
+                Target: {
+                    ResourceType: 'Film',
+                    ResourceId: id,
+                    Owner: null,
+                    OwnerType: 2
                 }
             }, options
         }

@@ -20,7 +20,9 @@ const errorNamespaces = {
     SERVICE_UNAVAILABLE:        [14, HTTPStatus.SERVICE_UNAVAILABLE, 'Service not available', 'SERVICE_UNAVAILABLE'],
     TOO_MANY_REQUESTS:          [15, HTTPStatus.TOO_MANY_REQUESTS, 'Too many requests', 'TOO_MANY_REQUESTS'],
     BAD_REQUEST:                [16, HTTPStatus.BAD_REQUEST, 'Bad request', 'BAD_REQUEST'],
-    REQUEST_TIMEOUT:            [17, HTTPStatus.REQUEST_TIMEOUT, 'Request timeout', 'REQUEST_TIMEOUT'],
+    CONFLICT:                   [17, HTTPStatus.CONFLICT, 'Conflict', 'CONFLICT'],
+    REQUEST_TIMEOUT:            [18, HTTPStatus.REQUEST_TIMEOUT, 'Request timeout', 'REQUEST_TIMEOUT'],
+    TOO_MANY_REQUESTS:          [19, HTTPStatus.TOO_MANY_REQUESTS, 'Too many request', 'TOO_MANY_REQUESTS'],
     // Internal
     UNKNOWN_GAME:               [30, HTTPStatus.INTERNAL_ERROR, 'Specified game does not exist: {0}', 'GAME_UNKNOWN'],
     UNKNOWN_AUTHORITY:          [31, HTTPStatus.INTERNAL_ERROR, 'Specified authoritiy does not exist: {0}', 'UNKNOWN_AUTHORITY'],
@@ -149,10 +151,10 @@ export default class HaloDotAPIError extends Error
     getCode = () => this.getFormatedError().code || DEFAULT_CODE
 
     /**
-     * Get error status
+     * Get error http status
      * @return {number}
      */
-    getStatus = () => this.getFormatedError().status || DEFAULT_STATUS
+    getHTTPStatus = () => this.getFormatedError().status || DEFAULT_STATUS
 
     /**
      * Get error message

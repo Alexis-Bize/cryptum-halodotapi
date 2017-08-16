@@ -164,11 +164,11 @@ const options = {
 **getFilmItem():**
 
 * Parameters:
-    * {string} filmId
+    * {string} filmItemId
     * {Object} [options]
 * Sample code:
 ```javascript
-H5.getUGC().getFilmItem('FILM_ID')
+H5.getUGC().getFilmItem('FILM_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -176,11 +176,11 @@ H5.getUGC().getFilmItem('FILM_ID')
 **getFilmItemManifest():**
 
 * Parameters:
-    * {string} filmId
+    * {string} filmItemId
     * {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getFilmItemManifest('FILM_ID')
+H5.getUGC().getFilmItemManifest('FILM_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -450,7 +450,7 @@ H5.getUGC().deletePlayerBookmarkItem('PLAYER', 'BOOKMARK_ITEM_ID')
 * Parameters:
     * {string} player
     * {string} gameVariantItemId
-    * {string} ownerName 
+    * {string} [ownerName]
     * {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
@@ -470,7 +470,7 @@ H5.getUGC().copyGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', null)
 * Parameters:
     * {string} player
     * {string} mapVariantItemId
-    * {string} ownerName 
+    * {string} [ownerName]
     * {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
@@ -495,6 +495,47 @@ H5.getUGC().copyMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', null)
 * Sample call:
 ```javascript
 H5.getUGC().copyForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**bookmarkMapVariantItem():**
+
+* Parameters:
+    * {string} player
+    * {string} mapVariantItemId
+    * {string} ownerName 
+    * {Object} [options]
+* Sample call:
+```javascript
+H5.getUGC().bookmarkMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', 'OWNER_NAME')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**bookmarkGameVariantItem():**
+
+* Parameters:
+    * {string} player
+    * {string} gameVariantItemId
+    * {string} ownerName 
+    * {Object} [options]
+* Sample call:
+```javascript
+H5.getUGC().bookmarkMapVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**bookmarkFilmItem():**
+
+* Parameters:
+    * {string} player
+    * {string} filmItemId
+    * {Object} [options]
+* Sample call:
+```javascript
+H5.getUGC().bookmarkFilmItem('PLAYER', 'FILM_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -1137,25 +1178,26 @@ H5.getContentHacs().getByType('TYPE') // Deathfx, MetaCommendation...
     
 * `error.getCode()`:
     — Return error code.
-    
-* `error.getStatus()`:
-    — Return error HTTP status.
 
 * `error.getMessage()`:
     — Return error message.
 
 * `error.getStack()`:
     — Return error stack trace.
+    
+* `error.getHTTPStatus()`:
+    — Return error HTTP status.
 
-**HTTP Codes:**
+**HTTP Status:**
 
 * 400: Bad Request
 * 401: Unauthorized
 * 403: Authentication Required
 * 405: Method Not Allowed
+* 409: Conflict
 * 500: Internal Error
 
-Note: An authentication error may imply grant limitation (Trying to update another player, access to its inventory or a SpartanToken version / scope limitation).
+Note: "Authentication Required" error may imply grant limitation (Trying to update another player, access to its inventory or a SpartanToken version / scope limitation).
 
 ### Special thanks
 * Bungie, for making Halo

@@ -10,7 +10,8 @@ export default {
         GAME_VARIANT: `${authorities.UGC}/h5/players/{player}/gamevariants/{id}`,
         FORGE_GROUPS: `${authorities.UGC}/h5/players/{player}/forgegroups`,
         FORGE_GROUP: `${authorities.UGC}/h5/players/{player}/forgegroups/{id}`,
-        BOOKMARKS: `${authorities.UGC}/h5/players/{player}/bookmarks?target-type={targetType}`,
+        BOOKMARKS_TARGET: `${authorities.UGC}/h5/players/{player}/bookmarks?target-type={targetType}`,
+        BOOKMARKS: `${authorities.UGC}/h5/players/{player}/bookmarks`,
         BOOKMARK: `${authorities.UGC}/h5/players/{player}/bookmarks/{id}`,
         COPY_ITEM: `${authorities.UGC}/h5/players/{player}/{collection}/actions/copy`
     },
