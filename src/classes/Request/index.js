@@ -224,8 +224,6 @@ export default class Request
                 requestOptions.headers['Content-Type'] = `${HTTPContentTypes.JSON}; charset=utf-8`
             }
 
-            //requestOptions.headers.Accept = 'application/soap+xml';
-
             request(requestOptions, (responseError, responseInfo, responseBody) => {
 
                 if (responseError) {

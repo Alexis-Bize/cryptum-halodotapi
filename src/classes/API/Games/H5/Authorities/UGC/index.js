@@ -530,7 +530,7 @@ export default class UGC extends Request
         this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
             player, body: {
                 Name: 'Cryptum - Film',
-                Description: 'cryptum-halodotap',
+                Description: 'cryptum-halodotapi',
                 AccessControl: 0,
                 Target: {
                     ResourceType: 'Film',
