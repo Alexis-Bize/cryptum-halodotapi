@@ -14,8 +14,8 @@ Looking for variants or Forge groups? There is a **search endpoint** for that. W
 import HaloDotAPI from 'cryptum-halodotapi'
 
 const H5 = HaloDotAPI.initializeGame(
-	HaloDotAPI.getGames().H5, // h5
-	'...' // SpartanToken
+    HaloDotAPI.getGames().H5, // h5
+    '...' // SpartanToken
 );
 
 const H5HaloPlayer = H5.getHaloPlayer(); // Authority
@@ -89,16 +89,16 @@ let H5 = null;
 
 // Requires Xbox LIVE credentials
 HaloDotAPI.getSpartanTokenManager().generate(
-	'email@xboxlive.com',
-	'password'
+    'email@xboxlive.com',
+    'password'
 ).then(spartanToken => {
 
-	H5 = HaloDotAPI.initializeGame(
-		HaloDotAPI.getGames().H5,
-		spartanToken
-	);
-	
-	// ...
+    H5 = HaloDotAPI.initializeGame(
+        HaloDotAPI.getGames().H5,
+        spartanToken
+    );
+    
+    // ...
 
 }).catch(error => console.log(error));
 
@@ -110,52 +110,52 @@ Note: Once retrieved / generated, your **SpartanToken** will expires after ~3 ho
 **API methods:**
 
 * `getGames()`:
-	— Return supported games.
+    — Return supported games.
 
 * `getPlatforms()`:
-	— Return supported platforms. May be used for stats.
+    — Return supported platforms. May be used for stats.
 
 * `getSpartanTokenManager()`:
-	— Return an instance of SpartanTokenManager.
+    — Return an instance of SpartanTokenManager.
 
 * `initializeGame(string:game)`:
-	— Initialize a GameClass. 
+    — Initialize a GameClass. 
 
 **Authorities methods (H5):**
 
 * `getUGC()`:
-	— Provides Metadata about User-Generated Content.
+    — Provides Metadata about User-Generated Content.
 
 * `getSpartanStats()`:
-	— Provides Metadata about User-Generated Content.
+    — Provides Metadata about User-Generated Content.
 
 * `getHaloPlayer()`:
-	— Provides Profile information about Players.
+    — Provides Profile information about Players.
 
 * `getContentHacs()`:
-	— Provides Metadata information.
+    — Provides Metadata information.
 
 * `getPacks()`:
-	— Provides data about REQ Packs and Cards.
+    — Provides data about REQ Packs and Cards.
 
 * `getSearch()`:
-	— Provides Search endpoints.
+    — Provides Search endpoints.
 
 * `getBanProcessor()`:
-	— Provides ban informations about Players.
+    — Provides ban informations about Players.
 
 Each method returned by a selected authority supports an additional `options` argument which can be used to pass `query`,`headers`, and `platform` parameters .
 
 ```javascript
 const options = {
-	query: {
-		count: 10,
-		// ...
-	},
-	headers: {
-		Accept: 'text/xml',
-		// ...
-	}
+    query: {
+        count: 10,
+        // ...
+    },
+    headers: {
+        Accept: 'text/xml',
+        // ...
+    }
 }
 ```
 
@@ -164,8 +164,8 @@ const options = {
 **getFilmItem():**
 
 * Parameters:
-	* {string} filmId
-	* {Object} [options]
+    * {string} filmId
+    * {Object} [options]
 * Sample code:
 ```javascript
 H5.getUGC().getFilmItem('FILM_ID')
@@ -176,8 +176,8 @@ H5.getUGC().getFilmItem('FILM_ID')
 **getFilmItemManifest():**
 
 * Parameters:
-	* {string} filmId
-	* {Object} [options]
+    * {string} filmId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getFilmItemManifest('FILM_ID')
@@ -188,8 +188,8 @@ H5.getUGC().getFilmItemManifest('FILM_ID')
 **getPlayerMapVariants():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerMapVariants('Le ZeNy')
@@ -200,8 +200,8 @@ H5.getUGC().getPlayerMapVariants('Le ZeNy')
 **getPlayerGameVariants():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerGameVariants('X3CXeX v3')
@@ -212,8 +212,8 @@ H5.getUGC().getPlayerGameVariants('X3CXeX v3')
 **getPlayerForgeGroups():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerForgeGroups('PLAYER')
@@ -224,9 +224,9 @@ H5.getUGC().getPlayerForgeGroups('PLAYER')
 **getPlayerMapVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} mapVariantItemId
-	* {Object} [options]
+    * {string} player
+    * {string} mapVariantItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2')
@@ -237,9 +237,9 @@ H5.getUGC().getPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765f
 **getPlayerGameVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} gameVariantItemId
-	* {Object} [options]
+    * {string} player
+    * {string} gameVariantItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e84675b553c')
@@ -250,9 +250,9 @@ H5.getUGC().getPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e846
 **getPlayerForgeGroupItem():**
 
 * Parameters:
-	* {string} player
-	* {string} forgeGroupItemId
-	* {Object} [options]
+    * {string} player
+    * {string} forgeGroupItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
@@ -263,9 +263,9 @@ H5.getUGC().getPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
 **getPlayerBookmarkedItem():**
 
 * Parameters:
-	* {string} player
-	* {string} bookmarkItemId
-	* {Object} [options]
+    * {string} player
+    * {string} bookmarkItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerBookmarkedItem('PLAYER', 'BOOKMARK_ITEM_ID')
@@ -276,8 +276,8 @@ H5.getUGC().getPlayerBookmarkedItem('PLAYER', 'BOOKMARK_ITEM_ID')
 **getPlayerBookmarkedMapVariants():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerBookmarkedMapVariants('PLAYER')
@@ -288,8 +288,8 @@ H5.getUGC().getPlayerBookmarkedMapVariants('PLAYER')
 **getPlayerBookmarkedGameVariants():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerBookmarkedGameVariants('PLAYER')
@@ -300,8 +300,8 @@ H5.getUGC().getPlayerBookmarkedGameVariants('PLAYER')
 **getPlayerBookmarkedForgeGroups():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerBookmarkedForgeGroups('PLAYER')
@@ -312,8 +312,8 @@ H5.getUGC().getPlayerBookmarkedForgeGroups('PLAYER')
 **getPlayerBookmarkedFilms():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerBookmarkedFilms('PLAYER')
@@ -324,16 +324,16 @@ H5.getUGC().getPlayerBookmarkedFilms('PLAYER')
 **patchPlayerMapVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} mapVariantItemId
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {string} mapVariantItemId
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().patchPlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', {
-	Name: 'Battle Of Noctus',
-	Description: 'HaloDotAPI',
-	Tags: [ 'cryptum', 'zeny' ]
+    Name: 'Battle Of Noctus',
+    Description: 'HaloDotAPI',
+    Tags: [ 'cryptum', 'zeny' ]
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -342,16 +342,16 @@ H5.getUGC().patchPlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', {
 **patchPlayerGameVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} gameVariantItemId
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {string} gameVariantItemId
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().patchPlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', {
-	Name: 'No Weapon Start',
-	Description: 'HaloDotAPI',
-	Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
+    Name: 'No Weapon Start',
+    Description: 'HaloDotAPI',
+    Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -360,16 +360,16 @@ H5.getUGC().patchPlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', {
 **patchPlayerForgeGroupItem():**
 
 * Parameters:
-	* {string} player
-	* {string} forgeGroupItemId
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {string} forgeGroupItemId
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', {
-	Name: 'HCS Decals',
-	Description: 'From the hidden 343i Forge menus.',
-	Tags: [ 'mods' ]
+    Name: 'HCS Decals',
+    Description: 'From the hidden 343i Forge menus.',
+    Tags: [ 'mods' ]
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -378,16 +378,16 @@ H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', {
 **patchPlayerBookmarkItem():**
 
 * Parameters:
-	* {string} player
-	* {string} bookmarkItemId
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {string} bookmarkItemId
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'BOOKMARK_ITEM_ID', {
-	Name: 'Slice Disabled',
-	Description: 'HaloDotAPI',
-	Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
+    Name: 'Slice Disabled',
+    Description: 'HaloDotAPI',
+    Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -396,9 +396,9 @@ H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'BOOKMARK_ITEM_ID', {
 **deletePlayerMapVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} mapVariantItemId
-	* {Object} [options]
+    * {string} player
+    * {string} mapVariantItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().deletePlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID')
@@ -409,9 +409,9 @@ H5.getUGC().deletePlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID')
 **deletePlayerGameVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} gameVariantItemId
-	* {Object} [options]
+    * {string} player
+    * {string} gameVariantItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().deletePlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID')
@@ -422,9 +422,9 @@ H5.getUGC().deletePlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID')
 **deletePlayerForgeGroupItem():**
 
 * Parameters:
-	* {string} player
-	* {string} forgeGroupItemId
-	* {Object} [options]
+    * {string} player
+    * {string} forgeGroupItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().deletePlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
@@ -435,9 +435,9 @@ H5.getUGC().deletePlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
 **deletePlayerBookmarkItem():**
 
 * Parameters:
-	* {string} player
-	* {string} bookmarkItemId
-	* {Object} [options]
+    * {string} player
+    * {string} bookmarkItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().deletePlayerBookmarkItem('PLAYER', 'BOOKMARK_ITEM_ID')
@@ -448,10 +448,10 @@ H5.getUGC().deletePlayerBookmarkItem('PLAYER', 'BOOKMARK_ITEM_ID')
 **copyGameVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} gameVariantItemId
-	* {string} ownerName 
-	* {Object} [options]
+    * {string} player
+    * {string} gameVariantItemId
+    * {string} ownerName 
+    * {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
 H5.getUGC().copyGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME')
@@ -468,10 +468,10 @@ H5.getUGC().copyGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', null)
 **copyMapVariantItem():**
 
 * Parameters:
-	* {string} player
-	* {string} mapVariantItemId
-	* {string} ownerName 
-	* {Object} [options]
+    * {string} player
+    * {string} mapVariantItemId
+    * {string} ownerName 
+    * {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
 H5.getUGC().copyMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', 'OWNER_NAME')
@@ -488,10 +488,10 @@ H5.getUGC().copyMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', null)
 **copyForgeGroupItem():**
 
 * Parameters:
-	* {string} player
-	* {string} forgeGroupItemId
-	* {string} ownerName 
-	* {Object} [options]
+    * {string} player
+    * {string} forgeGroupItemId
+    * {string} ownerName 
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().copyForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
@@ -504,8 +504,8 @@ H5.getUGC().copyForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
 **getPlayerCredits():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getPlayerCredits('PLAYER')
@@ -516,8 +516,8 @@ H5.getSpartanStats().getPlayerCredits('PLAYER')
 **getPlayerCommendations():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getPlayerCommendations('PLAYER')
@@ -528,8 +528,8 @@ H5.getSpartanStats().getPlayerCommendations('PLAYER')
 **getPlayerServiceRecords():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getPlayerServiceRecords('PLAYER')
@@ -540,12 +540,12 @@ H5.getSpartanStats().getPlayerServiceRecords('PLAYER')
 **getPlayerMatches():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getPlayerMatches('PLAYER', {
-	platform: 'PC' // HaloDotAPI.getPlatforms().PC
+    platform: 'PC' // HaloDotAPI.getPlatforms().PC
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -554,9 +554,9 @@ H5.getSpartanStats().getPlayerMatches('PLAYER', {
 **getCampaignMatchResult():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getCampaignMatchResult('PLAYER', 'MATCH_ID')
@@ -567,9 +567,9 @@ H5.getSpartanStats().getCampaignMatchResult('PLAYER', 'MATCH_ID')
 **getArenaMatchResult():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getArenaMatchResult('PLAYER', 'MATCH_ID')
@@ -580,9 +580,9 @@ H5.getSpartanStats().getArenaMatchResult('PLAYER', 'MATCH_ID')
 **getWarzoneMatchResult():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getWarzoneMatchResult('PLAYER', 'MATCH_ID')
@@ -593,9 +593,9 @@ H5.getSpartanStats().getWarzoneMatchResult('PLAYER', 'MATCH_ID')
 **getCustomMatchResult():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getCustomMatchResult('PLAYER', 'MATCH_ID')
@@ -606,9 +606,9 @@ H5.getSpartanStats().getCustomMatchResult('PLAYER', 'MATCH_ID')
 **getCampaignMatchEvents():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getCampaignMatchEvents('PLAYER', 'MATCH_ID')
@@ -619,9 +619,9 @@ H5.getSpartanStats().getCampaignMatchEvents('PLAYER', 'MATCH_ID')
 **getArenaMatchEvents():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getArenaMatchEvents('PLAYER', 'MATCH_ID')
@@ -632,9 +632,9 @@ H5.getSpartanStats().getArenaMatchEvents('PLAYER', 'MATCH_ID')
 **getWarzoneMatchEvents():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getWarzoneMatchEvents('PLAYER', 'MATCH_ID')
@@ -645,9 +645,9 @@ H5.getSpartanStats().getWarzoneMatchEvents('PLAYER', 'MATCH_ID')
 **getCustomMatchEvents():**
 
 * Parameters:
-	* {string} player
-	* {string} matchId
-	* {Object} [options]
+    * {string} player
+    * {string} matchId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getCustomMatchEvents('PLAYER', 'MATCH_ID')
@@ -658,8 +658,8 @@ H5.getSpartanStats().getCustomMatchEvents('PLAYER', 'MATCH_ID')
 **getSpartanCompany():**
 
 * Parameters:
-	* {string} spartanCompanyId
-	* {Object} [options]
+    * {string} spartanCompanyId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getSpartanCompany('SPARTAN_COMPANY_ID')
@@ -670,8 +670,8 @@ H5.getSpartanStats().getSpartanCompany('SPARTAN_COMPANY_ID')
 **getSpartanCompanyCommendations():**
 
 * Parameters:
-	* {string} spartanCompanyId
-	* {Object} [options]
+    * {string} spartanCompanyId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSpartanStats().getSpartanCompanyCommendations('SPARTAN_COMPANY_ID')
@@ -684,8 +684,8 @@ H5.getSpartanStats().getSpartanCompanyCommendations('SPARTAN_COMPANY_ID')
 **getPlayerSpartan():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerSpartan('PLAYER')
@@ -696,8 +696,8 @@ H5.getHaloPlayer().getPlayerSpartan('PLAYER')
 **getPlayerEmblem():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerEmblem('PLAYER')
@@ -708,8 +708,8 @@ H5.getHaloPlayer().getPlayerEmblem('PLAYER')
 **getPlayersProfile():**
 
 * Parameters:
-	* {Array} players
-	* {Object} [options]
+    * {Array} players
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayersProfile(['PLAYER_1', 'PLAYER_2'])
@@ -720,8 +720,8 @@ H5.getHaloPlayer().getPlayersProfile(['PLAYER_1', 'PLAYER_2'])
 **getPlayerAppearance():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerAppearance('PLAYER')
@@ -732,8 +732,8 @@ H5.getHaloPlayer().getPlayerAppearance('PLAYER')
 **getPlayerInventory():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerInventory('PLAYER')
@@ -744,8 +744,8 @@ H5.getHaloPlayer().getPlayerInventory('PLAYER')
 **getPlayerPreferences():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerPreferences('PLAYER')
@@ -756,8 +756,8 @@ H5.getHaloPlayer().getPlayerPreferences('PLAYER')
 **getPlayerControls():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerControls('PLAYER')
@@ -768,8 +768,8 @@ H5.getHaloPlayer().getPlayerControls('PLAYER')
 **getPlayerCampaign():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().getPlayerCampaign('PLAYER')
@@ -780,25 +780,25 @@ H5.getHaloPlayer().getPlayerCampaign('PLAYER')
 **patchPlayerAppearance():**
 
 * Parameters:
-	* {string} player
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().patchPlayerAppearance('PLAYER', {
-	Emblem: {
-		PrimaryColor: 60,
-		HarmonyGroupIndex: 0
-	},
-	ModelCustomization: {
-		ColorSecondary: 12,
-		WeaponSkinIds: {
-			'44600': 0
-		},
-		StanceRotation: 180,
-		DeathFX: 0
-	},
-	ServiceTag: 'ZENY'
+    Emblem: {
+        PrimaryColor: 60,
+        HarmonyGroupIndex: 0
+    },
+    ModelCustomization: {
+        ColorSecondary: 12,
+        WeaponSkinIds: {
+            '44600': 0
+        },
+        StanceRotation: 180,
+        DeathFX: 0
+    },
+    ServiceTag: 'ZENY'
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -807,21 +807,21 @@ H5.getHaloPlayer().patchPlayerAppearance('PLAYER', {
 **patchPlayerPreferences():**
 
 * Parameters:
-	* {string} player
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().patchPlayerPreferences('PLAYER', {
-	Forge: {
-		CinematicPlayerCount: 32
-	},
-	Matchmaking: {
-		MatchmakingPreferences: 2
-	},
-	Hud: {
-		TeamColorMode: 1
-	}
+    Forge: {
+        CinematicPlayerCount: 32
+    },
+    Matchmaking: {
+        MatchmakingPreferences: 2
+    },
+    Hud: {
+        TeamColorMode: 1
+    }
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -830,16 +830,16 @@ H5.getHaloPlayer().patchPlayerPreferences('PLAYER', {
 **patchPlayerControls():**
 
 * Parameters:
-	* {string} player
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().patchPlayerControls('PLAYER', {
-	MaintainSprint: false,
-	AimStickAxialDeadZone: 10,
-	SmoothScrolling: true,
-	AimAssist: true // What?
+    MaintainSprint: false,
+    AimStickAxialDeadZone: 10,
+    SmoothScrolling: true,
+    AimAssist: true // What?
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -848,32 +848,32 @@ H5.getHaloPlayer().patchPlayerControls('PLAYER', {
 **patchPlayerCampaign():**
 
 * Parameters:
-	* {string} player
-	* {Object} patchData
-	* {Object} [options]
+    * {string} player
+    * {Object} patchData
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getHaloPlayer().patchPlayerCampaign('PLAYER', {
-	AvailableMissionIds: [
-		{
-			Id: 1,
-			Available: true
-		}
-	],
-	AvailableSkullIds: [
-		{
-			Id: 8,
-			Available: false
-		}
-	],
-	LocatedAudioLogIds: [
-		{
-			Id: 19,
-			Available: true
-		}
-	],
-	CompletedTutorialIds: [],
-	MissionDifficulties: []
+    AvailableMissionIds: [
+        {
+            Id: 1,
+            Available: true
+        }
+    ],
+    AvailableSkullIds: [
+        {
+            Id: 8,
+            Available: false
+        }
+    ],
+    LocatedAudioLogIds: [
+        {
+            Id: 19,
+            Available: true
+        }
+    ],
+    CompletedTutorialIds: [],
+    MissionDifficulties: []
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -884,8 +884,8 @@ H5.getHaloPlayer().patchPlayerCampaign('PLAYER', {
 **getPlayerPacks():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().getPlayerPacks('PLAYER')
@@ -896,9 +896,9 @@ H5.getPacks().getPlayerPacks('PLAYER')
 **getPlayerPackItem():**
 
 * Parameters:
-	* {string} player
-	* {string} packItemId
-	* {Object} [options]
+    * {string} player
+    * {string} packItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().getPlayerPackItem('PLAYER', 'PACK_ITEM_ID')
@@ -909,9 +909,9 @@ H5.getPacks().getPlayerPackItem('PLAYER', 'PACK_ITEM_ID')
 **getPlayerCards():**
 
 * Parameters:
-	* {string} player
-	* {string} packItemId
-	* {Object} [options]
+    * {string} player
+    * {string} packItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().getPlayerCards('PLAYER')
@@ -922,9 +922,9 @@ H5.getPacks().getPlayerCards('PLAYER')
 **getPlayerCardItem():**
 
 * Parameters:
-	* {string} player
-	* {string} cardItemId
-	* {Object} [options]
+    * {string} player
+    * {string} cardItemId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().getPlayerCardItem('PLAYER', 'CARD_ITEM_ID')
@@ -935,8 +935,8 @@ H5.getPacks().getPlayerCardItem('PLAYER', 'CARD_ITEM_ID')
 **getPlayerStore():**
 
 * Parameters:
-	* {string} player
-	* {Object} [options]
+    * {string} player
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().getPlayerStore('PLAYER')
@@ -947,10 +947,10 @@ H5.getPacks().getPlayerStore('PLAYER')
 **openPlayerPackInstance():**
 
 * Parameters:
-	* {string} player
-	* {string} packItemId
-	* {string} packInstanceId
-	* {Object} [options]
+    * {string} player
+    * {string} packItemId
+    * {string} packInstanceId
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getPacks().openPlayerPackInstance('PLAYER', 'PACK_ITEM_ID', 'PACK_INSTANCE_ID')
@@ -964,15 +964,15 @@ H5.getPacks().openPlayerPackInstance('PLAYER', 'PACK_ITEM_ID', 'PACK_INSTANCE_ID
 **searchGameVariants():**
 
 * Parameters:
-	* {string} queryString
-	* {Object} [options]
+    * {string} queryString
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSearch().searchGameVariants('*', {
-	query: {
-		owner: 'X3CXeX v3',
-		count: 10
-	}
+    query: {
+        owner: 'X3CXeX v3',
+        count: 10
+    }
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -981,15 +981,15 @@ H5.getSearch().searchGameVariants('*', {
 **searchMapVariants():**
 
 * Parameters:
-	* {string} queryString
-	* {Object} [options]
+    * {string} queryString
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSearch().searchMapVariants('*', {
-	query: {
-		owner: 'Le ZeNy',
-		count: 10
-	}
+    query: {
+        owner: 'Le ZeNy',
+        count: 10
+    }
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -998,8 +998,8 @@ H5.getSearch().searchMapVariants('*', {
 **searchForgeGroups():**
 
 * Parameters:
-	* {string} queryString
-	* {Object} [options]
+    * {string} queryString
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSearch().searchForgeGroups('UNSC')
@@ -1010,14 +1010,14 @@ H5.getSearch().searchForgeGroups('UNSC')
 **searchPlayerFiles():**
 
 * Parameters:
-	* {string} queryString
-	* {Object} [options]
+    * {string} queryString
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSearch().searchPlayerFiles('Warzone', {
-	query: {
-		count: 20
-	}
+    query: {
+        count: 20
+    }
 })
 .then(result => console.log(result))
 .catch(error => console.log(error));
@@ -1028,8 +1028,8 @@ H5.getSearch().searchPlayerFiles('Warzone', {
 **getPlayersBanSummary():**
 
 * Parameters:
-	* {Array} players
-	* {Object} [options]
+    * {Array} players
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getSearch().getPlayersBanSummary(['PLAYER_1', 'PLAYER_2'])
@@ -1042,7 +1042,7 @@ H5.getSearch().getPlayersBanSummary(['PLAYER_1', 'PLAYER_2'])
 **getMessageOfTheDay():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getMessageOfTheDay()
@@ -1053,7 +1053,7 @@ H5.getContentHacs().getMessageOfTheDay()
 **getGameBaseVariants():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getGameBaseVariants()
@@ -1064,7 +1064,7 @@ H5.getContentHacs().getGameBaseVariants()
 **getGameVariantsDefinitions():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getGameVariantsDefinitions()
@@ -1075,7 +1075,7 @@ H5.getContentHacs().getGameVariantsDefinitions()
 **getWeaponsSkins():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getWeaponsSkins()
@@ -1086,7 +1086,7 @@ H5.getContentHacs().getWeaponsSkins()
 **getHoppers():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getHoppers()
@@ -1097,7 +1097,7 @@ H5.getContentHacs().getHoppers()
 **getEmblems():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getEmblems()
@@ -1108,7 +1108,7 @@ H5.getContentHacs().getEmblems()
 **getREQs():**
 
 * Parameters:
-	* {Object} [options]
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getREQs()
@@ -1119,8 +1119,8 @@ H5.getContentHacs().getREQs()
 **getByType():**
 
 * Parameters:
-	* {string} type
-	* {Object} [options]
+    * {string} type
+    * {Object} [options]
 * Sample call:
 ```javascript
 H5.getContentHacs().getByType('TYPE') // Deathfx, MetaCommendation...
@@ -1133,19 +1133,19 @@ H5.getContentHacs().getByType('TYPE') // Deathfx, MetaCommendation...
 **Methods:**
 
 * `error.getReason()`:
-	— Return error reason.
-	
+    — Return error reason.
+    
 * `error.getCode()`:
-	— Return error code.
-	
+    — Return error code.
+    
 * `error.getStatus()`:
-	— Return error HTTP status.
+    — Return error HTTP status.
 
 * `error.getMessage()`:
-	— Return error message.
+    — Return error message.
 
 * `error.getStack()`:
-	— Return error stack trace.
+    — Return error stack trace.
 
 **HTTP Codes:**
 
