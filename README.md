@@ -106,15 +106,6 @@ HaloDotAPI.getSpartanTokenManager().generate(
 ```
 Note: Once retrieved / generated, your **SpartanToken** will expires after ~3 hours. No worries, the **SpartanTokenManager** will renew it and replay your request automatically.
 
-### HTTP Errors
-* 400: Bad Request
-* 401: Unauthorized
-* 403: Authentication Required
-* 405: Method Not Allowed
-* 500: Internal Error
-
-Note: An authentication error may imply grant limitation (Trying to update another player, access to its inventory or a SpartanToken version / scope limitation).
-
 ### Documentation
 **API methods:**
 
@@ -122,7 +113,7 @@ Note: An authentication error may imply grant limitation (Trying to update anoth
 	— Return supported games.
 
 * `getPlatforms()`:
-	— Return supported platforms.
+	— Return supported platforms. May be used for stats.
 
 * `getSpartanTokenManager()`:
 	— Return an instance of SpartanTokenManager.
@@ -153,15 +144,31 @@ Note: An authentication error may imply grant limitation (Trying to update anoth
 * `getBanProcessor()`:
 	— Provides ban informations about Players.
 
+Each method returned by a selected authority supports an additional `options` argument which can be used to pass `query`,`headers`, and `platform` parameters .
+
+```javascript
+const options = {
+	query: {
+		count: 10,
+		// ...
+	},
+	headers: {
+		Accept: 'text/xml',
+		// ...
+	}
+}
+```
+
 ### H5.getUGC() methods:
 
 **getFilmItem():**
 
 * Parameters:
 	* {string} filmId
+	* {Object} [options]
 * Sample code:
 ```javascript
-H5.getUGC().getFilmItem('7ce4ab32-a776-43a7-aff4-fa6d7e3e695f')
+H5.getUGC().getFilmItem('FILM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -170,9 +177,10 @@ H5.getUGC().getFilmItem('7ce4ab32-a776-43a7-aff4-fa6d7e3e695f')
 
 * Parameters:
 	* {string} filmId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getFilmItemManifest('7ce4ab32-a776-43a7-aff4-fa6d7e3e695f')
+H5.getUGC().getFilmItemManifest('FILM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -181,6 +189,7 @@ H5.getUGC().getFilmItemManifest('7ce4ab32-a776-43a7-aff4-fa6d7e3e695f')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerMapVariants('Le ZeNy')
@@ -192,6 +201,7 @@ H5.getUGC().getPlayerMapVariants('Le ZeNy')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerGameVariants('X3CXeX v3')
@@ -203,9 +213,10 @@ H5.getUGC().getPlayerGameVariants('X3CXeX v3')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerForgeGroups('Gamecheat13YT')
+H5.getUGC().getPlayerForgeGroups('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -214,7 +225,8 @@ H5.getUGC().getPlayerForgeGroups('Gamecheat13YT')
 
 * Parameters:
 	* {string} player
-	* {string} itemId
+	* {string} mapVariantItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2')
@@ -226,7 +238,8 @@ H5.getUGC().getPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765f
 
 * Parameters:
 	* {string} player
-	* {string} itemId
+	* {string} gameVariantItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
 H5.getUGC().getPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e84675b553c')
@@ -238,10 +251,11 @@ H5.getUGC().getPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e846
 
 * Parameters:
 	* {string} player
-	* {string} itemId
+	* {string} forgeGroupItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580-32106c7d3824')
+H5.getUGC().getPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -250,10 +264,11 @@ H5.getUGC().getPlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580-32
 
 * Parameters:
 	* {string} player
-	* {string} itemId
+	* {string} bookmarkItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerBookmarkedItem('X3CXeX v3', '9b16f28b-f26d-494d-9dac-3378c84bcd01')
+H5.getUGC().getPlayerBookmarkedItem('PLAYER', 'BOOKMARK_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -262,9 +277,10 @@ H5.getUGC().getPlayerBookmarkedItem('X3CXeX v3', '9b16f28b-f26d-494d-9dac-3378c8
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerBookmarkedMapVariants('Le ZeNy')
+H5.getUGC().getPlayerBookmarkedMapVariants('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -273,9 +289,10 @@ H5.getUGC().getPlayerBookmarkedMapVariants('Le ZeNy')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerBookmarkedGameVariants('X3CXeX v3')
+H5.getUGC().getPlayerBookmarkedGameVariants('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -284,9 +301,10 @@ H5.getUGC().getPlayerBookmarkedGameVariants('X3CXeX v3')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerBookmarkedForgeGroups('Le ZeNy')
+H5.getUGC().getPlayerBookmarkedForgeGroups('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -295,9 +313,10 @@ H5.getUGC().getPlayerBookmarkedForgeGroups('Le ZeNy')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().getPlayerBookmarkedFilms('Le ZeNy')
+H5.getUGC().getPlayerBookmarkedFilms('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -306,11 +325,12 @@ H5.getUGC().getPlayerBookmarkedFilms('Le ZeNy')
 
 * Parameters:
 	* {string} player
-	* {string} id
-	* {Object} data
+	* {string} mapVariantItemId
+	* {Object} patchData
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().patchPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2', {
+H5.getUGC().patchPlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', {
 	Name: 'Battle Of Noctus',
 	Description: 'HaloDotAPI',
 	Tags: [ 'cryptum', 'zeny' ]
@@ -323,11 +343,12 @@ H5.getUGC().patchPlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb76
 
 * Parameters:
 	* {string} player
-	* {string} id
-	* {Object} data
+	* {string} gameVariantItemId
+	* {Object} patchData
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().patchPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e84675b553c', {
+H5.getUGC().patchPlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', {
 	Name: 'No Weapon Start',
 	Description: 'HaloDotAPI',
 	Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
@@ -340,11 +361,12 @@ H5.getUGC().patchPlayerGameVariantItem('X3CXeX v3', 'b768f833-878b-4e15-96e3-8e8
 
 * Parameters:
 	* {string} player
-	* {string} id
-	* {Object} data
+	* {string} forgeGroupItemId
+	* {Object} patchData
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().patchPlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580-32106c7d3824', {
+H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', {
 	Name: 'HCS Decals',
 	Description: 'From the hidden 343i Forge menus.',
 	Tags: [ 'mods' ]
@@ -357,11 +379,12 @@ H5.getUGC().patchPlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580-
 
 * Parameters:
 	* {string} player
-	* {string} id
-	* {Object} data
+	* {string} bookmarkItemId
+	* {Object} patchData
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().patchPlayerForgeGroupItem('X3CXeX v3', 'a63a79d6-7caf-4572-a546-de89588b6b46', {
+H5.getUGC().patchPlayerForgeGroupItem('PLAYER', 'BOOKMARK_ITEM_ID', {
 	Name: 'Slice Disabled',
 	Description: 'HaloDotAPI',
 	Tags: [ 'cryptum', 'x3cxex v3', 'mods' ]
@@ -374,10 +397,11 @@ H5.getUGC().patchPlayerForgeGroupItem('X3CXeX v3', 'a63a79d6-7caf-4572-a546-de89
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} mapVariantItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().deletePlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2')
+H5.getUGC().deletePlayerMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -386,10 +410,11 @@ H5.getUGC().deletePlayerMapVariantItem('Le ZeNy', 'a5081546-b6be-4f3c-98a7-0ebb7
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} gameVariantItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().deletePlayerGameVariantItem('X3CXeX v3', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2')
+H5.getUGC().deletePlayerGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -398,10 +423,11 @@ H5.getUGC().deletePlayerGameVariantItem('X3CXeX v3', 'a5081546-b6be-4f3c-98a7-0e
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} forgeGroupItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().deletePlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580-32106c7d3824')
+H5.getUGC().deletePlayerForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -410,10 +436,11 @@ H5.getUGC().deletePlayerForgeGroupItem('Gamecheat13YT', 'a37e5f52-9faa-456a-a580
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} bookmarkItemId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().deletePlayerBookmarkItem('X3CXeX v3', 'a63a79d6-7caf-4572-a546-de89588b6b46')
+H5.getUGC().deletePlayerBookmarkItem('PLAYER', 'BOOKMARK_ITEM_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -422,17 +449,18 @@ H5.getUGC().deletePlayerBookmarkItem('X3CXeX v3', 'a63a79d6-7caf-4572-a546-de895
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} gameVariantItemId
 	* {string} ownerName 
+	* {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
-H5.getUGC().copyGameVariantItem('ske7ch', 'a63a79d6-7caf-4572-a546-de89588b6b46', 'X3CXeX v3')
+H5.getUGC().copyGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
 * Sample call ([Cms](https://content-hacs.svc.halowaypoint.com/content/guid-0e98003f35ef472db0111367172b6cf0)):
 ```javascript
-H5.getUGC().copyGameVariantItem('ske7ch', '0e98003f35ef472db0111367172b6cf0', null)
+H5.getUGC().copyGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', null)
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -441,17 +469,18 @@ H5.getUGC().copyGameVariantItem('ske7ch', '0e98003f35ef472db0111367172b6cf0', nu
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} mapVariantItemId
 	* {string} ownerName 
+	* {Object} [options]
 * Sample call (UgcPlayer):
 ```javascript
-H5.getUGC().copyMapVariantItem('GrimBrotherOne', 'a5081546-b6be-4f3c-98a7-0ebb765fd7e2', 'Le ZeNy')
+H5.getUGC().copyMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', 'OWNER_NAME')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
 * Sample call ([Cms](https://content-hacs.svc.halowaypoint.com/content/guid-46c3b1f1e6fb4893bac232a235bfbeae)):
 ```javascript
-H5.getUGC().copyMapVariantItem('GrimBrotherOne', '46c3b1f1e6fb4893bac232a235bfbeae', null)
+H5.getUGC().copyMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', null)
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -460,11 +489,12 @@ H5.getUGC().copyMapVariantItem('GrimBrotherOne', '46c3b1f1e6fb4893bac232a235bfbe
 
 * Parameters:
 	* {string} player
-	* {string} id
+	* {string} forgeGroupItemId
 	* {string} ownerName 
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().copyForgeGroupItem('Unyshek', 'a37e5f52-9faa-456a-a580-32106c7d3824', 'Gamecheat13YT')
+H5.getUGC().copyForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -475,9 +505,10 @@ H5.getUGC().copyForgeGroupItem('Unyshek', 'a37e5f52-9faa-456a-a580-32106c7d3824'
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getSpartanStats().getPlayerCredits('X3CXeX v3')
+H5.getSpartanStats().getPlayerCredits('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -486,9 +517,10 @@ H5.getSpartanStats().getPlayerCredits('X3CXeX v3')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getSpartanStats().getPlayerCommendations('X3CXeX v3')
+H5.getSpartanStats().getPlayerCommendations('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -497,9 +529,10 @@ H5.getSpartanStats().getPlayerCommendations('X3CXeX v3')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getSpartanStats().getPlayerServiceRecords('X3CXeX v3')
+H5.getSpartanStats().getPlayerServiceRecords('PLAYER')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -508,9 +541,12 @@ H5.getSpartanStats().getPlayerServiceRecords('X3CXeX v3')
 
 * Parameters:
 	* {string} player
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getSpartanStats().getPlayerMatches('Le ZeNy')
+H5.getSpartanStats().getPlayerMatches('PLAYER', {
+	platform: 'PC' // HaloDotAPI.getPlatforms().PC
+})
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -519,9 +555,618 @@ H5.getSpartanStats().getPlayerMatches('Le ZeNy')
 
 * Parameters:
 	* {string} player
+	* {string} matchId
+	* {Object} [options]
 * Sample call:
 ```javascript
-H5.getSpartanStats().getCampaignMatchResult('Le ZeNy', '4db5c0fc-b3c9-4753-a76a-217b1957af33')
+H5.getSpartanStats().getCampaignMatchResult('PLAYER', 'MATCH_ID')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
+
+**getArenaMatchResult():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getArenaMatchResult('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getWarzoneMatchResult():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getWarzoneMatchResult('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getCustomMatchResult():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getCustomMatchResult('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getCampaignMatchEvents():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getCampaignMatchEvents('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getArenaMatchEvents():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getArenaMatchEvents('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getWarzoneMatchEvents():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getWarzoneMatchEvents('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getCustomMatchEvents():**
+
+* Parameters:
+	* {string} player
+	* {string} matchId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getCustomMatchEvents('PLAYER', 'MATCH_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getSpartanCompany():**
+
+* Parameters:
+	* {string} spartanCompanyId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getSpartanCompany('SPARTAN_COMPANY_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getSpartanCompanyCommendations():**
+
+* Parameters:
+	* {string} spartanCompanyId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSpartanStats().getSpartanCompanyCommendations('SPARTAN_COMPANY_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### H5.getHaloPlayer() methods:
+
+**getPlayerSpartan():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerSpartan('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerEmblem():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerEmblem('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayersProfile():**
+
+* Parameters:
+	* {Array} players
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayersProfile(['PLAYER_1', 'PLAYER_2'])
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerAppearance():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerAppearance('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerInventory():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerInventory('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerPreferences():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerPreferences('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerControls():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerControls('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerCampaign():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().getPlayerCampaign('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**patchPlayerAppearance():**
+
+* Parameters:
+	* {string} player
+	* {Object} patchData
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().patchPlayerAppearance('PLAYER', {
+	Emblem: {
+		PrimaryColor: 60,
+		HarmonyGroupIndex: 0
+	},
+	ModelCustomization: {
+		ColorSecondary: 12,
+		WeaponSkinIds: {
+			'44600': 0
+		},
+		StanceRotation: 180,
+		DeathFX: 0
+	},
+	ServiceTag: 'ZENY'
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**patchPlayerPreferences():**
+
+* Parameters:
+	* {string} player
+	* {Object} patchData
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().patchPlayerPreferences('PLAYER', {
+	Forge: {
+		CinematicPlayerCount: 32
+	},
+	Matchmaking: {
+		MatchmakingPreferences: 2
+	},
+	Hud: {
+		TeamColorMode: 1
+	}
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**patchPlayerControls():**
+
+* Parameters:
+	* {string} player
+	* {Object} patchData
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().patchPlayerControls('PLAYER', {
+	MaintainSprint: false,
+	AimStickAxialDeadZone: 10,
+	SmoothScrolling: true,
+	AimAssist: true // What?
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**patchPlayerCampaign():**
+
+* Parameters:
+	* {string} player
+	* {Object} patchData
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getHaloPlayer().patchPlayerCampaign('PLAYER', {
+	AvailableMissionIds: [
+		{
+			Id: 1,
+			Available: true
+		}
+	],
+	AvailableSkullIds: [
+		{
+			Id: 8,
+			Available: false
+		}
+	],
+	LocatedAudioLogIds: [
+		{
+			Id: 19,
+			Available: true
+		}
+	],
+	CompletedTutorialIds: [],
+	MissionDifficulties: []
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### H5.getPacks() methods:
+
+**getPlayerPacks():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerPacks('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerPackItem():**
+
+* Parameters:
+	* {string} player
+	* {string} packItemId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerPackItem('PLAYER', 'PACK_ITEM_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerCards():**
+
+* Parameters:
+	* {string} player
+	* {string} packItemId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerCards('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerCardItem():**
+
+* Parameters:
+	* {string} player
+	* {string} cardItemId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerCardItem('PLAYER', 'CARD_ITEM_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getPlayerStore():**
+
+* Parameters:
+	* {string} player
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerCardItem('PLAYER')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**openPlayerPackInstance():**
+
+* Parameters:
+	* {string} player
+	* {string} packItemId
+	* {string} packInstanceId
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getPacks().getPlayerCardItem('PLAYER', 'PACK_ITEM_ID', 'PACK_INSTANCE_ID')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### H5.getSearch() methods:
+
+
+**searchGameVariants():**
+
+* Parameters:
+	* {string} queryString
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSearch().searchGameVariants('*', {
+	query: {
+		owner: 'X3CXeX v3',
+		count: 10
+	}
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**searchMapVariants():**
+
+* Parameters:
+	* {string} queryString
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSearch().searchMapVariants('*', {
+	query: {
+		owner: 'Le ZeNy',
+		count: 10
+	}
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**searchForgeGroups():**
+
+* Parameters:
+	* {string} queryString
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSearch().searchForgeGroups('UNSC')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**searchPlayerFiles():**
+
+* Parameters:
+	* {string} queryString
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSearch().searchPlayerFiles('Warzone', {
+	query: {
+		count: 20
+	}
+})
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### H5.getBanProcessor() methods:
+
+**getPlayersBanSummary():**
+
+* Parameters:
+	* {Array} players
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getSearch().getPlayersBanSummary(['PLAYER_1', 'PLAYER_2'])
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### H5.getContentHacs() methods:
+
+**getMessageOfTheDay():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getMessageOfTheDay()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getGameBaseVariants():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getGameBaseVariants()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getGameVariantsDefinitions():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getGameVariantsDefinitions()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getWeaponsSkins():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getWeaponsSkins()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getHoppers():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getHoppers()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getEmblems():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getEmblems()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getREQs():**
+
+* Parameters:
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getREQs()
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+**getByType():**
+
+* Parameters:
+	* {string} type
+	* {Object} [options]
+* Sample call:
+```javascript
+H5.getContentHacs().getByType('TYPE') // Deathfx, MetaCommendation...
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
+### API Errors
+
+**Methods:**
+
+* `error.getReason()`:
+	— Return error reason.
+	
+* `error.getCode()`:
+	— Return error code.
+	
+* `error.getStatus()`:
+	— Return error HTTP status.
+
+* `error.getMessage()`:
+	— Return error message.
+
+* `error.getStack()`:
+	— Return error stack trace.
+
+**HTTP Codes:**
+
+* 400: Bad Request
+* 401: Unauthorized
+* 403: Authentication Required
+* 405: Method Not Allowed
+* 500: Internal Error
+
+Note: An authentication error may imply grant limitation (Trying to update another player, access to its inventory or a SpartanToken version / scope limitation).
+
+### Special thanks
+* Bungie, for making Halo
+* 343 Industries, for free weapons skins and security flaws ;)
+* [My dogs and I](https://www.instagram.com/p/BW1_4RXgm2C)
+
+### Want to contribute?
+Feel free to open a pull request or an issue on [GitHub](https://github.com/Alexis-Bize/cryptum-halodotapi)!
+
+### Any questions?
+Tweet me at [@_SuckMyLuck](https://www.twitter.com/_SuckMyLuck) or message me on [Reddit](https://www.reddit.com/user/Zeny-/)!
+
+### Licence
+MIT

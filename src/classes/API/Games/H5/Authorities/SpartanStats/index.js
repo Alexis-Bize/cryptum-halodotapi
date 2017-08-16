@@ -195,7 +195,7 @@ export default class SpartanStats extends Request
     getSpartanCompanyCommendations = (companyId, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.SPARTAN_STATS.SPARTAN_COMPANY_COMMENDATIONS'), {
-            player, options
+            companyId, options
         }
     )
 

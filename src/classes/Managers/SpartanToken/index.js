@@ -90,7 +90,6 @@ class SpartanTokenManager
 
             const date = new Date();
             date.setHours(date.getHours() + 3);
-            const ISOString = date.toISOString();
 
             formated = Object.assign({}, formated, {
                 concat: spartanToken,
@@ -100,10 +99,7 @@ class SpartanTokenManager
                     (spartanToken.split('=')[1] || '')
                 ),
                 subject: (spartanToken.split('=')[1] || '').split(';')[0] || '',
-                expires: _.get(spartanToken, 'ExpiresUtc.ISO8601Date') || [
-                    ISOString.split('.')[0],
-                    ISOString.split('.')[1].match(/[a-zA-Z]/)[0] || ''
-                ].join('')
+                expires: _.get(spartanToken, 'ExpiresUtc.ISO8601Date') || date.toISOString()
             });
 
         }

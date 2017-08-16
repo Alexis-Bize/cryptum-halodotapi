@@ -146,23 +146,28 @@ export default class HaloDotAPIError extends Error
      * Get error code
      * @return {number}
      */
-    getErrorCode = () => this.getFormatedError().code || DEFAULT_CODE
+    getCode = () => this.getFormatedError().code || DEFAULT_CODE
 
     /**
      * Get error status
      * @return {number}
      */
-    getErrorStatus = () => this.getFormatedError().status || DEFAULT_STATUS
+    getStatus = () => this.getFormatedError().status || DEFAULT_STATUS
 
     /**
      * Get error message
      * @return {string}
      */
-    getErrorMessage = () => this.getFormatedError().message || DEFAULT_MESSAGE
+    getMessage = () => this.getFormatedError().message || DEFAULT_MESSAGE
 
     /**
      * Get error reason
      * @return {string}
      */
-    getErrorReason = () => this.getFormatedError().reason || DEFAULT_REASON
+    getReason = () => this.getFormatedError().reason || DEFAULT_REASON
+
+    /**
+     * Get error stack
+     */
+    getStack = () => this.stack
 }

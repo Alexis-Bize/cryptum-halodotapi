@@ -1,9 +1,17 @@
 import LiveService from './Services/Live'
 import WaypointService from './Services/Waypoint'
 
-const CLIENT_ID = '000000004C151C36'
-const REDIRECT_URI = 'https://linear-auth.svc.halowaypoint.com/authentication/signin/callback'
-const CALLBACK_URI = 'https://linear-auth.svc.halowaypoint.com/authentication/oauth_app'
+const REDIRECT_URIS = {
+    DESKTOP: 'https://login.live.com/oauth20_desktop.srf'
+}
+
+const CLIENT_IDS = {
+    HALO_SPARTAN_STRIKE_IOS: '000000004415041A',
+    HALO_APP: '00000000401A2535',
+    HALO_CHANNEL: '000000004C151C36',
+    HALO_WAYPOINT: '000000004C0BD2F1',
+    HALO_5_FORGE: '000000004419DE2C'
+}
 
 export default class SpartanTokenRetriever
 {
@@ -37,24 +45,17 @@ export default class SpartanTokenRetriever
     retriveSpartanToken = async () => {
 
         const live = new LiveService(
-            CLIENT_ID,
-            REDIRECT_URI,
-            CALLBACK_URI
+            CLIENT_IDS.HALO_SPARTAN_STRIKE_IOS,
+            REDIRECT_URIS.DESKTOP
         );
-        
-        const authorizationCode = await live.authUser(
+
+        const WLIDToken = await live.authUser(
             this.getEmail(),
             this.getPassword()
         );
 
-        const waypoint = new WaypointService(
-            CLIENT_ID,
-            CALLBACK_URI
-        );
-        
-        const spartanToken = await waypoint.authSpartan(
-            authorizationCode
-        );
+        const waypoint = new WaypointService();
+        const spartanToken = await waypoint.authSpartan(WLIDToken);
 
         return new Promise((resolve, reject) => {
             resolve(spartanToken);

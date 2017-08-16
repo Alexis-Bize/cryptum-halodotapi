@@ -7,14 +7,6 @@ import HTTPStatus from '@modules/http/status'
 import HTTPMethods from '@modules/http/methods'
 import HTTPContentTypes from '@modules/http/content-types'
 
-const RELYING_PARTIES = {
-    XBOX_LIVE: 'http://xboxlive.com',
-    PROD_XSTS: 'https://prod.xsts.halowaypoint.com/',
-    TEST_XSTS: 'https://test.xsts.halowaypoint.com/',
-    HALO_XSTS: 'https://halo-xsts-token.svc.halowaypoint.com/',
-    DUMMY_XSTS: 'https://dummy-xsts-host.svc.halowaypoint.com/'
-}
-
 const SPARTAN_TOKEN_VERSION = 3
 
 const HEADERS = {
@@ -27,12 +19,9 @@ export default class WaypointService
 {
     /**
      * WaypointService constructor
-     * @param {string} clientId 
-     * @param {string} callbackUri
      */
-    constructor(clientId, callbackUri) {
-        this.clientId = clientId;
-        this.callbackUri = callbackUri;
+    constructor() {
+
     }
 
     /**
@@ -49,14 +38,13 @@ export default class WaypointService
 
     /**
      * Auth spartan
-     * @param {string} authorizationCode
+     * @param {string} WLIDToken
      * @throws HaloDotAPIError
      * @return Promise
      */
-    authSpartan = async authorizationCode => {
+    authSpartan = async WLIDToken => {
 
-        const HaloXSTS = await this.retrieveHaloXSTS(authorizationCode);
-        const spartanToken = await this.retrieveSpartanToken(HaloXSTS);
+        const spartanToken = await this.retrieveSpartanToken(WLIDToken);
 
         return new Promise(resolve => {
             resolve(spartanToken);
@@ -65,69 +53,12 @@ export default class WaypointService
     }
 
     /**
-     * Retrieve Halo xsts
-     * @param {string} authorizationCode
-     * @throws HaloDotAPIError
-     * @return Promise
-     */
-    retrieveHaloXSTS = authorizationCode => {
-
-        return new Promise((resolve, reject) => {
-
-            const uri = [
-                `https://linear-auth.svc.halowaypoint.com/authentication/refresh/${this.getClientId()}`,
-                queryString.stringify({
-                    callback: this.getCallbackUri(),
-                    xstsTokenRelyingParties: [
-                        RELYING_PARTIES.XBOX_LIVE,
-                        RELYING_PARTIES.PROD_XSTS
-                    ].join(',')
-                })
-            ].join('?');
-
-            request({
-                uri,
-                method: HTTPMethods.GET,
-                headers: Object.assign({}, HEADERS, {
-                    'Authorization': `linear ${authorizationCode}`,
-                    'Accept': HTTPContentTypes.JSON
-                }),
-                agentOptions: {
-                    rejectUnauthorized: false
-                },
-                gzip: true,
-                json: true,
-                followRedirect: false
-            }, (err, response, body) => {
-
-                if (err || response.statusCode !== HTTPStatus.SUCCESS) {
-                    return reject(err || new HaloDotAPIError(
-                        getErrorByNamespaceKey('INTERNAL_ERROR')
-                    ));
-                }
-
-                const xsts = JSON.parse(
-                    new Buffer(
-                        body.linearToken.split('.')[1],
-                        'base64'
-                    ).toString('ascii')
-                )[RELYING_PARTIES.PROD_XSTS];
-
-                return resolve(xsts);
-
-            });
-
-        });
-
-    }
-
-    /**
      * Retrieve spartan token
-     * @param {string} HaloXSTS
+     * @param {string} WLIDToken
      * @throws HaloDotAPIError
      * @return Promise
      */
-    retrieveSpartanToken = HaloXSTS => {
+    retrieveSpartanToken = WLIDToken => {
 
         return new Promise((resolve, reject) => {
 
@@ -135,7 +66,7 @@ export default class WaypointService
                 uri: `https://settings.svc.halowaypoint.com/spartan-token?v=${SPARTAN_TOKEN_VERSION}`,
                 method: HTTPMethods.GET,
                 headers: Object.assign({}, HEADERS, {
-                    'X-343-Authorization-XBL3': `XBL3.0 x=*;${HaloXSTS}`,
+                    'X-343-Authorization-WLID': `t=${WLIDToken}`,
                     'User-Agent': 'cpprestsdk/2.4.0'
                 }),
                 agentOptions: {

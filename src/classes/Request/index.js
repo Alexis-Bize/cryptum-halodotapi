@@ -193,7 +193,7 @@ export default class Request
                     )
                 }, requestOptions.headers)
             }
-
+            
             if (true === _.isObject(options.query)) {
 
                 let cleanQuery = {};
@@ -223,8 +223,6 @@ export default class Request
                 requestOptions.json = body;
                 requestOptions.headers['Content-Type'] = `${HTTPContentTypes.JSON}; charset=utf-8`
             }
-
-            console.log(requestOptions.uri)
 
             request(requestOptions, (responseError, responseInfo, responseBody) => {
 
