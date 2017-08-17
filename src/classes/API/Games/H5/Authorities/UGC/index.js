@@ -154,8 +154,12 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedMapVariants = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
-            player, options, targetType: 'mapvariant'
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, options: _.merge({
+                query: {
+                    'target-type': 'mapvariant'
+                }
+            }, options)
         }
     )
 
@@ -168,8 +172,12 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedGameVariants = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
-            player, options, targetType: 'gamevariant'
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
+            player, options: _.merge({
+                query: {
+                    'target-type': 'gamevariant'
+                }
+            }, options)
         }
     )
 
@@ -183,7 +191,11 @@ export default class UGC extends Request
     getPlayerBookmarkedForgeGroups = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
-            player, options, targetType: 'forgegroup'
+            player, player, options: _.merge({
+                query: {
+                    'target-type': 'forgegroup'
+                }
+            }, options)
         }
     )
 
@@ -197,7 +209,11 @@ export default class UGC extends Request
     getPlayerBookmarkedFilms = (player, options = {}) => this.call(
         HTTPMethods.GET,
         this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
-            player, options, targetType: 'film'
+            player, player, options: _.merge({
+                query: {
+                    'target-type': 'film'
+                }
+            }, options)
         }
     )
 
@@ -374,19 +390,19 @@ export default class UGC extends Request
      * Copy game variant
      * @param {string} player
      * @param {string} id
-     * @param {string=} ownerName
+     * @param {string|null} ownerName
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyGameVariantItem = (player, id, ownerName = '', options = {}) => this.call(
+    copyGameVariantItem = (player, id, ownerName = null, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'gamevariants', body: {
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'GameVariant',
-                    Owner: ownerName || null,
+                    Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options
@@ -397,19 +413,19 @@ export default class UGC extends Request
      * Copy map variant
      * @param {string} player
      * @param {string} id
-     * @param {string=} ownerName
+     * @param {string|null} ownerName
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyMapVariantItem = (player, id, ownerName = '', options = {}) => this.call(
+    copyMapVariantItem = (player, id, ownerName = null, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'mapvariants', body: {
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'MapVariant',
-                    Owner: ownerName || null,
+                    Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options
@@ -420,19 +436,19 @@ export default class UGC extends Request
      * Copy forge group
      * @param {string} player
      * @param {string} id
-     * @param {string=} ownerName
+     * @param {string|null} ownerName
      * @param {Object=} options
      * @throws HaloDotAPIError
      * @return Promise
      */
-    copyForgeGroupItem = (player, id, ownerName = '', options = {}) => this.call(
+    copyForgeGroupItem = (player, id, ownerName = null, options = {}) => this.call(
         HTTPMethods.POST,
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'forgegroups', body: {
                 SourceFile: {
                     ResourceId: id,
                     ResourceType: 'ForgeGroup',
-                    Owner: ownerName || null,
+                    Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
                 }
             }, options

@@ -527,6 +527,20 @@ H5.getUGC().bookmarkMapVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME
 .catch(error => console.log(error));
 ```
 
+**bookmarkForgeGroupItem():**
+
+* Parameters:
+    * {string} player
+    * {string} forgeGroupItemId
+    * {string} ownerName 
+    * {Object} [options]
+* Sample call:
+```javascript
+H5.getUGC().bookmarkMapVariantItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
+.then(result => console.log(result))
+.catch(error => console.log(error));
+```
+
 **bookmarkFilmItem():**
 
 * Parameters:
