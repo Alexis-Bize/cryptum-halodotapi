@@ -190,7 +190,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedForgeGroups = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
             player, player, options: _.merge({
                 query: {
                     'target-type': 'forgegroup'
@@ -208,7 +208,7 @@ export default class UGC extends Request
      */
     getPlayerBookmarkedFilms = (player, options = {}) => this.call(
         HTTPMethods.GET,
-        this.getEndpointByKey('H5.UGC.BOOKMARKS_TARGET'), {
+        this.getEndpointByKey('H5.UGC.BOOKMARKS'), {
             player, player, options: _.merge({
                 query: {
                     'target-type': 'film'

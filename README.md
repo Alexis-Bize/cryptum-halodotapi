@@ -522,7 +522,7 @@ H5.getUGC().bookmarkMapVariantItem('PLAYER', 'MAP_VARIANT_ITEM_ID', 'OWNER_NAME'
     * {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().bookmarkMapVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME')
+H5.getUGC().bookmarkGameVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
@@ -536,7 +536,7 @@ H5.getUGC().bookmarkMapVariantItem('PLAYER', 'GAME_VARIANT_ITEM_ID', 'OWNER_NAME
     * {Object} [options]
 * Sample call:
 ```javascript
-H5.getUGC().bookmarkMapVariantItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
+H5.getUGC().bookmarkForgeGroupItem('PLAYER', 'FORGE_GROUP_ITEM_ID', 'OWNER_NAME')
 .then(result => console.log(result))
 .catch(error => console.log(error));
 ```
