@@ -400,7 +400,7 @@ export default class UGC extends Request
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'gamevariants', body: {
                 SourceFile: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'GameVariant',
                     Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
@@ -423,7 +423,7 @@ export default class UGC extends Request
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'mapvariants', body: {
                 SourceFile: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'MapVariant',
                     Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
@@ -446,7 +446,7 @@ export default class UGC extends Request
         this.getEndpointByKey('H5.UGC.COPY_ITEM'), {
             player, collection: 'forgegroups', body: {
                 SourceFile: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'ForgeGroup',
                     Owner: ownerName,
                     OwnerType: ownerName ? 'UgcPlayer' : 'Cms'
@@ -472,7 +472,7 @@ export default class UGC extends Request
                 Description: 'cryptum-halodotapi',
                 AccessControl: 0,
                 Target: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'GameVariant',
                     Owner: ownerName,
                     OwnerType: 'UgcPlayer'
@@ -498,7 +498,7 @@ export default class UGC extends Request
                 Description: 'cryptum-halodotapi',
                 AccessControl: 0,
                 Target: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'MapVariant',
                     Owner: ownerName,
                     OwnerType: 'UgcPlayer'
@@ -524,7 +524,7 @@ export default class UGC extends Request
                 Description: 'cryptum-halodotapi',
                 AccessControl: 0,
                 Target: {
-                    ResourceId: id,
+                    ResourceId: id || '',
                     ResourceType: 'ForgeGroup',
                     Owner: ownerName,
                     OwnerType: 'UgcPlayer'
@@ -550,7 +550,7 @@ export default class UGC extends Request
                 AccessControl: 0,
                 Target: {
                     ResourceType: 'Film',
-                    ResourceId: id,
+                    ResourceId: id || '',
                     Owner: null,
                     OwnerType: 2
                 }

@@ -30,18 +30,6 @@ class API
     getPlatforms = () => platforms
 
     /**
-     * Get HTTP methods
-     * @return {Object} HTTPMethods
-     */
-    getHTTPMethods = () => HTTPMethods
-
-    /**
-     * Get handlers
-     * @return {Object} Handlers
-     */
-    getHandlers = () => Handlers
-
-    /**
      * Initialize GameClass
      * @param {string} game
      * @param {Object|string} spartanToken

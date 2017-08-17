@@ -27,6 +27,15 @@ export default class Request
     getEndpointByKey = key => _.get(this.getEndpoints(), key) || null
 
     /**
+     * Get mandatory endpoint parameters
+     * @param {string} endpoint
+     * @return {Array}
+     */
+    getMandatoryEndpointParameters = endpoint => (
+        endpoint.match(/{([a-zA-Z]*?)}/g) || []
+    ).map(match => match.replace(/{|}/g, ''))
+
+    /**
      * Check spartanToken format
      * @return {boolean}
      */
@@ -132,6 +141,26 @@ export default class Request
                 );
             }
 
+            parameters = this.formatParameters(
+                parameters
+            );
+
+            this.getMandatoryEndpointParameters(endpoint).forEach(parameter => {
+                if (
+                    Object.keys(parameters).indexOf(parameter) !== -1 &&
+                    undefined === parameters[parameter]
+                ) {
+                    return reject(
+                        new HaloDotAPIError(
+                            getErrorByNamespaceKey(
+                                'MISSING_PARAMETER',
+                                [ parameter ]
+                            )
+                        )
+                    );
+                }
+            });
+            
             if (false === this.hasSpartanTokenValidFormat()) {
                 return reject(
                     new HaloDotAPIError(
@@ -157,10 +186,12 @@ export default class Request
 
             }
 
-            parameters = this.formatParameters(parameters);
-
+            let { options = {} } = parameters;
             const { body } = parameters;
-            const { options = {} } = parameters;
+
+            if (false === _.isObject(options)) {
+                options = {};
+            }
 
             if (true !== options.unsetSpartanToken &&
                 true !== options.useTelemetrySpartanToken && (

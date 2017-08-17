@@ -22,8 +22,8 @@ export default {
         PRESENCE: `${authorities.SPARTAN_STATS}/h5/presence?players={players}`,
         SERVICE_RECORDS: `${authorities.SPARTAN_STATS}/h5/servicerecords/{mode}?players={players}`,
         COMMENDATIONS: `${authorities.SPARTAN_STATS}/h5/players/{player}/commendations`,
-        SPARTAN_COMPANY: `${authorities.SPARTAN_STATS}/oban/companies/{id}`,
-        SPARTAN_COMPANY_COMMENDATIONS: `${authorities.SPARTAN_STATS}/h5/companies/{id}/commendations`,
+        SPARTAN_COMPANY: `${authorities.SPARTAN_STATS}/oban/companies/{companyId}`,
+        SPARTAN_COMPANY_COMMENDATIONS: `${authorities.SPARTAN_STATS}/h5/companies/{companyId}/commendations`,
     },
     HALO_PLAYER: {
         SPARTAN: `${authorities.HALO_PLAYER}/h5/profiles/{player}/spartan`,
