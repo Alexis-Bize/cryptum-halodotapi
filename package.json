@@ -1,7 +1,7 @@
 {
     "name": "cryptum-halodotapi",
     "description": "Advanced Halo 5 API wrapper which can be extended to other Halo games",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Alexis 'Zeny' Bize <alexis.bize@gmail.com>",
     "license": "MIT",
     "dependencies": {
