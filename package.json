@@ -1,11 +1,11 @@
 {
     "name": "cryptum-halodotapi",
     "description": "Advanced Halo 5 API wrapper which can be extended to other Halo games",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "author": "Alexis 'Zeny' Bize <alexis.bize@gmail.com>",
     "license": "MIT",
     "dependencies": {
-        "babel-polyfill": "6.26.x",
+        "cryptum-spartantoken-retriever": "0.0.x",
         "lodash.isobject": "3.0.x",
         "lodash.merge": "4.6.x",
         "lodash.get": "4.4.x",

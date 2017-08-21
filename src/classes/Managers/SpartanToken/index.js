@@ -1,4 +1,4 @@
-import Retriever from './Retriever'
+import SpartanTokenRetriever from 'cryptum-spartantoken-retriever'
 import _ from '@modules/helpers/lodash'
 
 class SpartanTokenManager
@@ -120,13 +120,13 @@ class SpartanTokenManager
      * @param {string} email
      * @param {string} password
      * @param {boolean=} autoRenew
-     * @throws HaloDotAPIError
+     * @throws SpartanTokenError
      * @return Promise
      */
     generate = async (email, password, autoRenew = true) => {
 
-        const retriever = new Retriever(email, password);
-        const spartanToken = await retriever.retriveSpartanToken();
+        const retriever = new SpartanTokenRetriever(email, password);
+        const spartanToken = await retriever.retrieve();
 
         return new Promise(resolve => {
             this.setAutoRenewStatus(autoRenew);
@@ -138,7 +138,7 @@ class SpartanTokenManager
 
     /**
      * Renew spartan token with current credentials
-     * @throws HaloDotAPIError
+     * @throws SpartanTokenError
      * @return Promise
      */
     renew = async () => {
