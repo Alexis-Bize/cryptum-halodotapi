@@ -12,6 +12,7 @@
                     "@modules": "./src/modules"
                 }
             }
-        ]
+        ],
+        ["transform-runtime"]
     ]
 }
