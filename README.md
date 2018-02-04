@@ -1222,7 +1222,7 @@ Note: "Authentication Required" error may imply grant limitation (Trying to upda
 Feel free to open a pull request or an issue on [GitHub](https://github.com/Alexis-Bize/cryptum-halodotapi)!
 
 ### Any questions?
-Tweet me at [@_SuckMyLuck](https://www.twitter.com/_SuckMyLuck) or message me on [Reddit](https://www.reddit.com/user/Zeny-/)!
+Tweet me at [@Zeny_IC](https://www.twitter.com/Zeny_IC) or message me on [Reddit](https://www.reddit.com/user/Zeny-/)!
 
 ### Licence
 MIT
